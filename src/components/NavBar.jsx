@@ -1,5 +1,6 @@
 //this is the navbar, needs to be on every page for navigation
-//space to import stuff
+//FORGOT TO IMPORT LINK FOR NAVIGATION
+import { Link } from "react-router-dom";
 
 
 
@@ -7,9 +8,11 @@
 function NavBar() {
     return (
         //doing the html scaffolding with links to each page
-        //unsure if the homepage should be money snapshot or give a dedicated page?
-        <nav class="nav-bar">
+        //unsure if the homepage should be money snapshot or give a dedicated page? FOR NOW imma do it
+        <nav className="nav-bar">
+            {/*landing page*/}
             <Link to="/">Homepage</Link> 
+            {/*other sections*/}
             <Link to="/strattracks">Strategy Tracks</Link>
             <Link to="/simLab">Simulation Lab</Link>
             <Link to="/profile">Profile</Link>
