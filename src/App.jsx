@@ -36,6 +36,7 @@ function App(){
     <Routes>
       <Route path="/" element={<Homepage />} />
 
+      <Route path="moneysnap" element={<MoneySnapshot />} />
       <Route path="strattracks" element={<StrategyTracks />} />
       <Route path="simlab" element={<SimulationLab />} />
       <Route path="profile" element={<Profile />} />
@@ -43,8 +44,8 @@ function App(){
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
     </Routes>
-  
-
+    {/*didnt include the money snapshot page as i want this and profile to be the pages that require auth*/}
+    {/*idk i think i should remove homepage from the navbar...unsure */}
     </main>
     </Router>
     </>

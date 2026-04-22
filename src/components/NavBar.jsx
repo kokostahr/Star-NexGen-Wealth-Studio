@@ -13,6 +13,7 @@ function NavBar() {
             {/*landing page*/}
             <Link to="/">Homepage</Link> 
             {/*other sections*/}
+            <Link to="/moneysnap"> Money Snapshot</Link>
             <Link to="/strattracks">Strategy Tracks</Link>
             <Link to="/simLab">Simulation Lab</Link>
             <Link to="/profile">Profile</Link>
