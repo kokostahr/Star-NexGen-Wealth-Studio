@@ -15,7 +15,7 @@ import TrackDetail from "./pages/TrackDetail";
 import SimulationLab from "./pages/SimulationLab";
 import SimulationStudio from "./pages/SimulationStudio";
 import Profile from "./pages/Profile";
-import Signup from "./pages/Signup";
+import Signup from "./pages/AuthPage";
 import Login from "./pages/Login";
 
 //components 

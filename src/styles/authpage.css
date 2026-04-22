@@ -1,0 +1,106 @@
+/*main css used across the pages. literally just taken from my doc*/
+
+:root {
+  /*main colours*/
+  --absa-red: #D2002A;
+  --deep-maroon: #6A0D25;
+
+  /*secondary colours*/
+  --beige: #F5E6D3;
+  --sand: #E8D3B9;
+  --soft-grey: #D1D5DB;
+
+  /*blues*/
+  --muted-blue: #6b8ca6;
+  --slate-blue: #4a6a85;
+
+  /*idk why i made gradients.*/
+  --gradient-rose-cream: linear-gradient(92deg, #f8c8dc, #fff5e1);
+  --gradient-maroon-blush: linear-gradient(89deg, #6a0d25, #f4a6b8);
+
+  /*functionnal colours*/ 
+  --positive-green: #2e7d32;
+  --warning-amber: #f9a825;
+  --emergency-red: #c62828;
+
+  /*font and typogrgraphy*/
+  --main-font: "DM Serif Display", serif;
+
+  /*spacing*/
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+
+  /*border radiuses*/
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+
+  /*shadows*/
+  --soft-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.auth-page {
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.auth-title {
+  color: var(--deep-maroon);
+  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+}
+
+.auth-box {
+  background: var(--beige);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.2rem solid var(--muted-blue);
+  box-shadow: var(--soft-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.auth-box label {
+  text-align: left;
+  font-weight: bold;
+  color: var(--deep-maroon);
+}
+
+.auth-box input {
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 0.1rem solid var(--soft-grey);
+  font-size: 1rem;
+}
+
+.auth-btn {
+  background: var(--absa-red);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: bold;
+  margin-top: var(--space-md);
+}
+
+.auth-btn:hover {
+  background: var(--deep-maroon);
+}
+
+.auth-switch {
+  font-size: 0.9rem;
+  color: var(--slate-blue);
+}
+
+.auth-switch span {
+  color: var(--absa-red);
+  font-weight: bold;
+  cursor: pointer;
+}
