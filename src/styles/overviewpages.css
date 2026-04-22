@@ -43,27 +43,27 @@
   --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-.tracks-page {
+.overview-page {
     max-width: 75rem;
     margin: 0 auto;
     padding: var(--space-xl);
 }
 
-.tracks-title {
+.overview-title {
     text-align: center;
     margin-bottom: var(--space-xl);
     color: var(--deep-maroon);
     font-size: 2rem;
 }
 
-.tracks-row {
+.overview-row {
     display: flex;
     justify-content: space-between;
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
 }
 
-.track-card {
+.overview-card {
     flex: 1;
     background: var(--soft-grey);
     padding: var(--space-lg);
@@ -76,18 +76,18 @@
     justify-content: space-between;
 }
 
-.track-card h2 {
+.overview-card h2 {
     color: var(--deep-maroon);
     margin-bottom: var(--space-sm);
 }
 
-.track-desc {
+.overview-desc {
     color: var(--slate-blue);
     margin-bottom: var(--space-md);
     font-size: 0.95rem;
 }
 
-.track-btn {
+.overview-btn {
     background: var(--absa-red);
     color: white;
     padding: var(--space-sm) var(--space-md);
@@ -98,11 +98,11 @@
     margin-top: auto;
 }
 
-.track-btn:hover {
+.overview-btn:hover {
     background: var(--deep-maroon);
 }
 
-.recommended-box {
+.overview-recommended {
   background: var(--gradient-rose-cream);
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
@@ -111,7 +111,7 @@
   border: 0.2rem solid var(--deep-maroon);
 }
 
-.recommended-box h3 {
+.overview-recommended {
   color: var(--deep-maroon);
   margin-bottom: var(--space-sm);
 }

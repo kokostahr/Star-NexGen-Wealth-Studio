@@ -90,6 +90,22 @@ padding-bottom: 1rem;
 
 }
 
+.btn-wan:hover {
+   border: .38rem solid var(--deep-maroon);
+   background: var(--gradient-rose-cream);
+   color: var(--deep-maroon);
+
+}
+
+
+.btn-too:hover {
+   border: .38rem solid var(--absa-red);
+   background: var(--gradient-rose-cream);
+   color: var(--absa-red);
+
+}
+
+
 .section {
   padding: var(--space-xl) var(--space-lg);
 }
