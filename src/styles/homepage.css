@@ -43,62 +43,39 @@
   --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/*now for the other stuff ...*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.homepage-container {
+    text-align: center;
+    padding: var(--space-xl);
 }
 
-body {
-font-family: var(--main-font);
-background-color: var(--beige);
-color: var(--deep-maroon);
-line-height: 1.6;
-padding-bottom: 1rem;
-}
-
-.btn {
-  padding: var(--space-sm);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  
-}
-
-.btn-wan {
-  background-color: var(--absa-red);
-  color: white;
-}
-
-.btn-too {
-  background-color: var(--sand);
-  color: var(--deep-maroon);
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+    color: var(--deep-maroon);
 
 }
 
-.section {
-  padding: var(--space-xl) var(--space-lg);
+.hero p {
+    font-size: 1.2rem;
+    color: var(--slate-blue);
 }
 
-/*navbar styleing*/
-.nav-bar {
-  display: flex;
-  gap: var(--space-md);
-  padding: var(--space-md);
-  background-color: var(--deep-maroon);
-  color: white;
-
+.homepage-buttons {
+    margin-top: var(--space-lg);
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
 }
 
-.nav-bar a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+.homepage-info {
+    margin-top: var(--space-xl);
+    background: var(--gradient-rose-cream);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--soft-shadow);
 }
 
-.nav-bar a:hover {
-  text-decoration: underline;
-  /*will later5 add an animation for the whole link to raise up slightly*/
+.homepage-info h2 {
+    font-size: 2.5rem;
+    color: var(--deep-maroon);
 }

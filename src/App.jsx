@@ -1,6 +1,6 @@
 //now to do all that crazy importing stuff 😭heavily reliant on andre & lindo's code
 //space for css when we do that
-
+import "./App.css";
 
 //actually first first, browser router, for dynamic navigation across the app.react is preloaded so this makes it easier tojump between pages from the client....i think
 
