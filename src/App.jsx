@@ -15,8 +15,8 @@ import TrackDetail from "./pages/TrackDetail";
 import SimulationLab from "./pages/SimulationLab";
 import SimulationStudio from "./pages/SimulationStudio";
 import Profile from "./pages/Profile";
-import Signup from "./pages/AuthPage";
-import Login from "./pages/Login";
+import AuthPage from "./pages/AuthPage";
+//import Login from "./pages/Login";
 
 //components 
 import NavBar from "./components/NavBar";
@@ -41,11 +41,10 @@ function App(){
       <Route path="simlab" element={<SimulationLab />} />
       <Route path="profile" element={<Profile />} />
 
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/auth" element={<AuthPage />} />
       
-            <Route path="/trackdetails" element={<TrackDetail />} />
-            <Route path="simstudio" element={<SimulationStudio />} />
+      <Route path="/trackdetails" element={<TrackDetail />} />
+      <Route path="simstudio" element={<SimulationStudio />} />
 
     </Routes>
     {/*didnt include the money snapshot page as i want this and profile to be the pages that require auth*/}
