@@ -57,8 +57,8 @@
 }
 
 .trackdetails-comment {
-    text-align: left;
-    font-weight: bold;
+  text-align: left;
+  font-weight: bold;
   margin-bottom: var(--space-xl);
   color: var(--deep-maroon);
   font-size: 1.2rem;

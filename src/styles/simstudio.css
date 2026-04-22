@@ -1,0 +1,153 @@
+/*main css used across the pages. literally just taken from my doc*/
+
+:root {
+  /*main colours*/
+  --absa-red: #D2002A;
+  --deep-maroon: #6A0D25;
+
+  /*secondary colours*/
+  --beige: #F5E6D3;
+  --sand: #E8D3B9;
+  --soft-grey: #D1D5DB;
+
+  /*blues*/
+  --muted-blue: #6b8ca6;
+  --slate-blue: #4a6a85;
+
+  /*idk why i made gradients.*/
+  --gradient-rose-cream: linear-gradient(92deg, #f8c8dc, #fff5e1);
+  --gradient-maroon-blush: linear-gradient(89deg, #6a0d25, #f4a6b8);
+
+  /*functionnal colours*/ 
+  --positive-green: #2e7d32;
+  --warning-amber: #f9a825;
+  --emergency-red: #c62828;
+
+  /*font and typogrgraphy*/
+  --main-font: "DM Serif Display", serif;
+
+  /*spacing*/
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+
+  /*border radiuses*/
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+
+  /*shadows*/
+  --soft-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/*just realised that i repeat this on all css files... will change later if i remember*/
+.simstudio-page {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: var(--space-xl);
+
+}
+
+.simstudio-title {
+    text-align: left;
+    margin-bottom: var(--space-xl);
+    color: var(--absa-red);
+    font-size: 2rem;
+}
+
+.simstudio-layout {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+}
+
+.inputs-container {
+    flex: 1;
+    background: var(--soft-grey);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 0.2rem solid var(--muted-blue);
+    box-shadow: var(--medium-shadow);
+}
+
+.inputs-container h2 {
+    color: var(--deep-maroon);
+    margin-bottom: var(--space-md);
+}
+
+.input-group {
+    margin-bottom: var(--space-lg);
+}
+
+.input-group label {
+    font-weight: bold;
+    color: var(--deep-maroon);
+}
+
+.input-group input[type="range"] {
+    width: 100%;
+    margin-top: var(--space-xs);
+}
+
+.input value {
+    color: var(--slate-blue);
+    font-size: 0.9rem;
+    margin-top: var(--space-xs);
+}
+
+.outputs-container {
+    flex: 1.2;
+    background: var(--beige);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 0.2rem solid var(--muted-blue);
+    box-shadow: var(--soft-shadow);
+}
+
+.outputs-container h2 {
+    color: var(--deep-maroon);
+    margin-bottom: var(--space-md);
+}
+
+.output-bar {
+    margin-bottom: var(--space-md);
+}
+
+.output-bar p {
+    font-weight: bold;
+    color: var(--deep-maroon);
+    margin-bottom: var(--space-xs);
+}
+
+.bar-placeholder {
+    width: 100%;
+    height: 1.5rem;
+    background: var(--soft-grey);
+    border-radius: var(--radius-sm);
+    border: 0.1rem solid var(--muted-blue);
+}
+
+.verdic-box {
+    margin-top: var(--space-lg);
+    background: var(--gradient-rose-cream);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    border: 0.2rem solid var(--deep-maroon);
+    text-align: center;
+}
+
+.verdic-box h3 {
+    color: var(--deep-maroon);
+    margin-bottom: var(--space-xs);
+}
+
+.simstudio-btns {
+  margin-top: var(--space-xl);
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space-lg);
+}
