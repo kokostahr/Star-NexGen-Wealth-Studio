@@ -43,6 +43,10 @@ function App(){
 
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
+      
+            <Route path="/trackdetails" element={<TrackDetail />} />
+            <Route path="simstudio" element={<SimulationStudio />} />
+
     </Routes>
     {/*didnt include the money snapshot page as i want this and profile to be the pages that require auth*/}
     {/*idk i think i should remove homepage from the navbar...unsure */}

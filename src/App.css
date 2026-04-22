@@ -64,17 +64,29 @@ padding-bottom: 1rem;
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
-  
 }
 
 .btn-wan {
-  background-color: var(--absa-red);
-  color: white;
+  padding: var(--space-sm);
+  font-size: larger;
+  font-weight: bold;
+  line-height: 1.6;
+  border: .3rem solid var(--absa-red);
+  border-radius: var(--radius-md);
+  color: var(--absa-red);
+  background: whitesmoke;
 }
 
 .btn-too {
-  background-color: var(--sand);
+  padding: var(--space-sm);
+  font-size: larger;
+  font-weight: bold;
+  line-height: 1.6;
+  border: .3rem solid var(--deep-maroon);
+  border-radius: var(--radius-md);
+  background: whitesmoke;
   color: var(--deep-maroon);
+  text-decoration: none;
 
 }
 
