@@ -129,6 +129,12 @@
   border: 0.0625rem solid var(--muted-blue);
 }
 
+.breakdown-item:hover {
+  background: var(--gradient-rose-cream);
+  color: var(--deep-maroon);
+  border: 0.2rem solid var(--deep-maroon)
+}
+
 .key-finances {
   display: flex;
   flex-direction: column;
@@ -140,6 +146,12 @@
   padding: var(--space-md);
   border-radius: var(--radius-md);
   border: 0.0625rem solid var(--muted-blue);
+}
+
+.finance-box:hover {
+  background: var(--gradient-rose-cream);
+  color: var(--deep-maroon);
+  border: 0.2rem solid var(--deep-maroon)
 }
 
 .goal {

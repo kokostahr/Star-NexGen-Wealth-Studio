@@ -52,7 +52,7 @@
 
 body {
 font-family: var(--main-font);
-background-color: var(--beige);
+background-color: whitesmoke;
 color: var(--deep-maroon);
 line-height: 1.6;
 padding-bottom: 1rem;
@@ -93,12 +93,16 @@ padding-bottom: 1rem;
 }
 
 .nav-bar a {
+  padding: var(--space-xs);
+  border: 0.1rem solid white;
+  border-radius: var(--radius-sm);
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
 .nav-bar a:hover {
-  text-decoration: underline;
+  background-color: white;
+  color: var(--deep-maroon);
   /*will later5 add an animation for the whole link to raise up slightly*/
 }
