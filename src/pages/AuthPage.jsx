@@ -51,10 +51,15 @@ function AuthPage() {
 
         //for both login and sign up
         if (!formData.email.trim()) {
-            newErrors.email = "Formatting is incorrect. Your email is required."
+            newErrors.email = "Formatting is incorrect. Your email is required.";
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email.";
         }
-        else if (formData.password.length < 8) {
-            newErrors.password = "Password must be 8 characters or more."
+
+        if (!formData.password.trim()) {
+            newErrors.password = "Password is required.";
+        } else if (formData.password.length < 8) {
+            newErrors.password = "Password must be 8 characters or more.";
         }
 
         return newErrors;
@@ -126,7 +131,7 @@ function AuthPage() {
                             value={formData.phone}
                             onChange={handleChange}
                         />
-                        {error.phone && <p className="field-error"> {errors.phone}</p>}
+                        {errors.phone && <p className="field-error"> {errors.phone}</p>}
                     </>
                 )}
 
@@ -159,9 +164,9 @@ function AuthPage() {
                 {/*link to switch the form to the necessay one...*/}
                 {isLogin ? (
                     <>
-                        <p className="auth-switch">
+                        {/*<p className="auth-switch">
                             Forgot your password? Click{" "} <span>here</span>
-                        </p>
+                        </p>*/}
                         <p className="auth-switch">
                             Dont have an account? Click{" "} <span onClick={() => setIsLogin(false)}>here</span>
                             {" "} to create one.

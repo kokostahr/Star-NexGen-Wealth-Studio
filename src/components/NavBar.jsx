@@ -16,7 +16,7 @@ function NavBar() {
             <Link to="/moneysnap"> Money Snapshot</Link>
             <Link to="/strattracks">Strategy Tracks</Link>
             <Link to="/simLab">Simulation Lab</Link>
-            <Link to="/profile">Profile</Link>
+            {/*<Link to="/profile">Profile</Link>*/}
             <Link to="/auth">SignUp</Link>
         </nav>
     )

@@ -81,12 +81,12 @@ padding-bottom: 1rem;
   padding: var(--space-sm);
   font-size: larger;
   font-weight: bold;
+  text-decoration: none;
   line-height: 1.6;
   border: .3rem solid var(--deep-maroon);
   border-radius: var(--radius-md);
   background: whitesmoke;
   color: var(--deep-maroon);
-  text-decoration: none;
 
 }
 
