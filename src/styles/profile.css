@@ -133,3 +133,23 @@
   color: var(--deep-maroon);
   margin-bottom: var(--space-sm);
 }
+
+.saved-income-display {
+  margin-bottom: var(--space-md);
+  font-weight: bold;
+  color: var(--deep-maroon);
+}
+
+.save-confirm {
+  margin-top: var(--space-sm);
+  color: var(--positive-green);
+  font-weight: bold;
+}
+
+input {
+  background-color: white;
+  color: var(--absa-red);
+  font-weight: bold;
+  border: 0.16rem solid var(--muted-blue);
+  font-size: .75rem;
+}

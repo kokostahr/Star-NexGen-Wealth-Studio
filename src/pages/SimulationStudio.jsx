@@ -30,6 +30,8 @@ function SimulationStudio() {
 //the total payment over 5 years
     const totalRent5 = rent * 12 * 5;
     const totalBond5 = monthlyBond * 12 * 5;
+    const bondPerYear = totalBond5 / 5;
+    const rentPerYear = totalRent5 / 5;
 //the outcome ofc
     const verdict = totalBond5 < totalRent5 ? "Buying becomes cheaper over 5 years." :
         "Renting remains cheaper over 5 years";
@@ -144,18 +146,30 @@ function SimulationStudio() {
                         <div className="outputs-container fade-in">
                             {[1, 2, 3, 4, 5].map((year) => (
                                 <div className="output-bar" key={year}>
-                                    <p> Year {year} </p>
-                                    <div className="bar-placeholder" style={{
-                                        height: barHeight(
-                                            year <= 5 ? totalBond5 / 5:0
-                                        ),}}>
+                                    <p>Year {year}</p>
+
+                                    <div className="dual-bars">
+                                        <div 
+                                        className="bar rent-bar"
+                                        style={{ height: barHeight(rentPerYear) }}
+                                        ></div>
+
+                                        <div 
+                                        className="bar bond-bar"
+                                        style={{ height: barHeight(bondPerYear) }}
+                                        ></div>
+                                    </div>
+
+                                    <div className="bar-labels">
+                                        <span>Rent</span>
+                                        <span>Bond</span>
                                     </div>
                                 </div>
                             ))}
 
                             <div className="verdict-box">
-                                <h3> Verdict</h3>
-                                <p> {verdict} </p>
+                                <h3>Verdict</h3>
+                                <p>{verdict}</p>
                             </div>
                         </div>
                     )}
@@ -163,6 +177,66 @@ function SimulationStudio() {
                 </div>
 
             </div>
+
+            {hasCalculated && !isLoading && (
+                <div className="education-box fade-in">
+                                <h3>Understanding This Scenario</h3>
+                                <p>
+                                    In South Africa, buying property is heavily influenced by the prime lending rate, 
+                                    which affects your monthly bond repayment. When interest rates rise, buying becomes 
+                                    more expensive; when they fall, buying becomes more attractive.
+                                </p>
+
+                                <p>
+                                    Renting offers flexibility and lower upfront costs, but you don’t build equity. 
+                                    Buying requires a deposit, transfer costs, and bond registration fees, but it can 
+                                    become cheaper over time as rent increases annually.
+                                </p>
+
+                                <h4>From a South African Lens...?</h4>
+                                <ul>
+                                    <li>Prime lending rate in SA typically ranges between 7%–11% depending on the year.</li>
+                                    <li>Transfer duty applies to properties above R1.1 million.</li>
+                                    <li>Bond registration and attorney fees can add 5%–8% to the upfront cost.</li>
+                                    <li>Rent in major cities like Johannesburg and Cape Town increases by 6%–10% annually.</li>
+                                </ul>
+
+                                <h4>What This Means For You?</h4>
+                                <p>
+                                    If your rent is rising faster than your income, buying may become cheaper sooner. 
+                                    If interest rates are high or you don’t have a deposit, renting may be the safer 
+                                    short‑term option. This studio helps you compare these trade‑offs over a 5‑year horizon.
+                                </p>
+                            </div>
+
+            )}
+
+            <div className="explainer-tiles fade-in">
+            <div className="explainer-tile">
+                <h4>What is a Bond?</h4>
+                <p>
+                A home loan repaid monthly over 20–30 years. Your repayment depends on the 
+                interest rate set by SA banks.
+                </p>
+            </div>
+
+            <div className="explainer-tile">
+                <h4>Why Interest Rate Matters</h4>
+                <p>
+                Higher interest rates increase your monthly repayment. When rates drop, buying 
+                becomes more affordable.
+                </p>
+            </div>
+
+            <div className="explainer-tile">
+                <h4>Renting vs Buying</h4>
+                <p>
+                Renting offers flexibility and lower upfront costs, while buying builds equity 
+                but requires a deposit and legal fees.
+                </p>
+            </div>
+            </div>
+
 
             <div className="simstudio-btns">
                 <Link to="/simlab" className="btn-too"> Try Another Simulation</Link>

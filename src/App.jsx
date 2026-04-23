@@ -20,38 +20,41 @@ import AuthPage from "./pages/AuthPage";
 
 //components 
 import NavBar from "./components/NavBar";
+import UserProvider from "./context/UserContext";
 
 
 function App(){
   //the stuff inside return function is what'll end up on the webpage
   return (
-    <>
-    <Router>
-    <header>
-      <NavBar />
-    </header>
-    
-    <main>
-      {/*cooking the routes so that the right page loads when the nav buttons are clicked*/}
-    <Routes>
-      <Route path="/" element={<Homepage />} />
+    <UserProvider>
+      <>
+        <Router>
+          <header>
+            <NavBar />
+          </header>
+          
+          <main>
+            {/*cooking the routes so that the right page loads when the nav buttons are clicked*/}
+          <Routes>
+            <Route path="/" element={<Homepage />} />
 
-      <Route path="moneysnap" element={<MoneySnapshot />} />
-      <Route path="strattracks" element={<StrategyTracks />} />
-      <Route path="simlab" element={<SimulationLab />} />
-      <Route path="profile" element={<Profile />} />
+            <Route path="moneysnap" element={<MoneySnapshot />} />
+            <Route path="strattracks" element={<StrategyTracks />} />
+            <Route path="simlab" element={<SimulationLab />} />
+            <Route path="profile" element={<Profile />} />
 
-      <Route path="/auth" element={<AuthPage />} />
-      
-      <Route path="/trackdetails" element={<TrackDetail />} />
-      <Route path="simstudio" element={<SimulationStudio />} />
+            <Route path="/auth" element={<AuthPage />} />
+            
+            <Route path="/trackdetails" element={<TrackDetail />} />
+            <Route path="simstudio" element={<SimulationStudio />} />
 
-    </Routes>
-    {/*didnt include the money snapshot page as i want this and profile to be the pages that require auth*/}
-    {/*idk i think i should remove homepage from the navbar...unsure */}
-    </main>
-    </Router>
-    </>
+          </Routes>
+          {/*didnt include the money snapshot page as i want this and profile to be the pages that require auth*/}
+          {/*idk i think i should remove homepage from the navbar...unsure */}
+          </main>
+        </Router>
+      </>
+    </UserProvider>
   );
 }
 

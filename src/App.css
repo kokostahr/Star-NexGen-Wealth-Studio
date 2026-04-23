@@ -42,7 +42,7 @@
   --soft-shadow: 0 2px 6px rgba(0,0,0,0.08);
   --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
 
-  /*MY COLOUR SCHEME SUCKS! will be updating it for the next submission*/
+  /*MY COLOUR SCHEME is not nice... at all! I will be revamping it after submittingfor assignment 1*/
 }
 
 /*now for the other stuff ...*/
@@ -60,53 +60,49 @@ line-height: 1.6;
 padding-bottom: 1rem;
 }
 
-.btn {
-  padding: var(--space-sm);
-  border-radius: var(--radius-md);
-  text-decoration: none;
+.btn-wan {
+  /*smth is overriding the btn decorationg T^T*/
+  padding: var(--space-sm) var(--space-md) !important;
+  font-size: 1.1rem;
   font-weight: bold;
+  text-decoration: none;
+  line-height: 1.6 !important;
+  border: .3rem solid var(--absa-red) !important;
+  border-radius: var(--radius-md);
+  color: var(--absa-red) !important;
+  background-color: white !important;
+  display: inline-block;
+  transition: 0.25s ease;
+  text-align: center;
   display: inline-block;
 }
 
-.btn-wan {
-  padding: var(--space-sm);
-  font-size: larger;
-  font-weight: bold;
-  line-height: 1.6;
-  border: .3rem solid var(--absa-red);
-  border-radius: var(--radius-md);
-  color: var(--absa-red);
-  background: whitesmoke;
+.btn-wan:hover {
+  border: .38rem solid var(--deep-maroon) !important;
+  background: var(--gradient-rose-cream) !important;
+  color: var(--deep-maroon) !important;
 }
-
 .btn-too {
-  padding: var(--space-sm);
-  font-size: larger;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 1.1rem;
   font-weight: bold;
   text-decoration: none;
-  line-height: 1.6;
+  line-height: 1.6 !important;
   border: .3rem solid var(--deep-maroon);
   border-radius: var(--radius-md);
   background: whitesmoke;
   color: var(--deep-maroon);
+  text-align: center;
+  display: inline-block;
 
 }
-
-.btn-wan:hover {
-   border: .38rem solid var(--deep-maroon);
-   background: var(--gradient-rose-cream);
-   color: var(--deep-maroon);
-
-}
-
 
 .btn-too:hover {
-   border: .38rem solid var(--absa-red);
-   background: var(--gradient-rose-cream);
-   color: var(--absa-red);
+  border: .38rem solid var(--absa-red);
+  background: var(--gradient-rose-cream);
+  color: var(--absa-red);
 
 }
-
 
 .section {
   padding: var(--space-xl) var(--space-lg);

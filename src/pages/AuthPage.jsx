@@ -10,11 +10,18 @@ import "../styles/authpage.css";
 import { Link } from "react-router-dom";
 import { useState } from "react"; //changing the state of the page should probably use context...but i think usestate is easier for now
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+//other stuff
+import { UserContext } from "../context/UserContext";
 
 
 //for the navbar here i need the signup button to disappear. will work on it later
 
 function AuthPage() {
+    //using context to store the username in a dynamic but kinda static way xD
+    const { setUserName, setUserEmail } = useContext(UserContext);
+
     //need the variables so that the info can switch ofc
     const [isLogin, setIsLogin] = useState(false);
 
@@ -86,6 +93,8 @@ function AuthPage() {
 
             //sucess message when things are done RIGHT
             alert(isLogin ? "Login successful 😌🔥" : "Account Created. Welcome to NexGen!")
+            setUserName(formData.name);
+            setUserEmail(formData.email);
             //then take the usar to the empty barebones profile for now
             navigate("/profile");
         }

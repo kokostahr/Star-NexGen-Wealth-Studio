@@ -65,9 +65,7 @@
 }
 
 .trackdetails-layout {
-  display: flex;
-  gap: var(--space-xl);
-  align-items: flex-start;
+  display: block;
 
 }
 
@@ -75,6 +73,7 @@
   display: flex;
   gap: var(--space-md);
   flex: 3;
+  margin-bottom: var(--space-xl);
 }
 
 .year-column {
@@ -82,7 +81,7 @@
   background: var(--soft-grey);
   padding: var(--space-md);
   border-radius: var(--radius-lg);
-  border: 0.18rem solid var(--muted-blue);
+  border: 0.2rem solid var(--muted-blue);
   box-shadow: var(--soft-shadow);
   max-height: 28rem;
   overflow-y: auto;
@@ -101,6 +100,18 @@
   margin-bottom: var(--space-sm);
 }
 
+.year-column select {
+  margin-left: var(--space-xs);
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  border: 0.18rem solid var(--deep-maroon);
+  background: white;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
 .year-section {
   margin-bottom: var(--space-md);
 }
@@ -109,6 +120,18 @@
   color: var(--slate-blue);
   text-decoration: underline;
   margin-bottom: var(--space-xs);
+}
+
+.year-section ul li {
+  margin-bottom: var(--space-xs);
+}
+
+.year-column ul {
+  padding-left: 1rem;
+}
+
+.year-section option {
+  color: black;
 }
 
 .focus-container {
@@ -152,6 +175,25 @@
   gap: var(--space-lg);
 }
 
+.learn-section {
+  margin-top: var(--space-xl);
+  background: var(--beige);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.2rem solid var(--sand);
+  box-shadow: var(--soft-shadow);
+}
+
+.learn-section h2 {
+  color: var(--deep-maroon);
+  margin-bottom: var(--space-md);
+}
+
+.learn-section p {
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
 .btn-primary {
   background: var(--absa-red);
   color: white;
@@ -168,4 +210,30 @@
   border-radius: var(--radius-md);
   text-decoration: none;
   font-weight: bold;
+}
+
+.explainer-tiles {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.explainer-tile {
+  flex: 1;
+  background: white;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 0.15rem solid var(--muted-blue);
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.explainer-tile:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--medium-shadow);
+}
+
+.explainer-tile h4 {
+  color: var(--deep-maroon);
+  margin-bottom: var(--space-xs);
 }

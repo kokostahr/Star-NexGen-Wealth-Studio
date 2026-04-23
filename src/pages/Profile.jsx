@@ -6,12 +6,19 @@ import "../styles/profile.css";
 
 //react
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { useState } from "react";
 
 //anything else
+import { UserContext } from "../context/UserContext";
 
     
 
 function Profile() {
+    const { userIncome, setUserIncome } = useContext(UserContext);
+    const { userName, userEmail } = useContext(UserContext);
+    const [saved, setSaved] = useState(false);
+
     return (
         <div className="profile-page">
             
@@ -26,7 +33,7 @@ function Profile() {
 
                     <div className="profile-field">
                         <label>Name and Surname</label>
-                        <input type="text" placeholder="Your full name" />
+                        <input type="text" value={userName} placeholder="Your full name" readOnly />
                     </div>
 
                     <div className="profile-field">
@@ -57,10 +64,13 @@ function Profile() {
                 <div className="profile-right">
 
                     <h2 className="section-title">Personal Info</h2>
+                    <p className="saved-income-display">
+                        Saved Monthly Income: <strong>R {userIncome.toLocaleString()}</strong>
+                    </p>
 
                     <div className="profile-field">
                         <label>Email Address</label>
-                        <input type="email" placeholder="example@email.com" />
+                        <input type="email" value={userEmail} readOnly />
                     </div>
 
                     <div className="profile-field">
@@ -75,7 +85,11 @@ function Profile() {
 
                     <div className="profile-field">
                         <label>Monthly Income</label>
-                        <input type="number" placeholder="R 0.00" />
+                        <input
+                            type="number"
+                            placeholder="R 0.00"
+                            value={userIncome}
+                            onChange={(e) => setUserIncome(Number(e.target.value))}/>
                     </div>
 
                     <div className="profile-field">
@@ -87,6 +101,16 @@ function Profile() {
                         <label>Current Debt</label>
                         <input type="number" placeholder="R 0.00" />
                     </div>
+
+                    <button 
+                    className="btn-wan"
+                    onClick={() => setSaved(true)}
+                    >
+                        Save Profile
+                    </button>
+                    {saved && (
+                        <p className="save-confirm">Profile saved successfully!</p>
+                    )}
 
                 </div>
             </div>

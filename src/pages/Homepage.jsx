@@ -23,7 +23,7 @@ function Homepage() {
 
         {/*need call to action things that'll take usar into the actual meat y potatoes of this webapp*/}
         <div className="homepage-buttons">
-            <Link to="/strattracks" className="btn-wan">
+            <Link className="btn-wan" to="/strattracks" >
             Explore the different strategy tracks.</Link>
 
             <Link to="/simlab" className="btn-too">
