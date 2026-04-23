@@ -36,7 +36,7 @@ function Homepage() {
             <p>
                 The NexGen Wealth Studio was built to assist young professionals with managaing
                 their finiances and finacial-related decisions through guided Strategy Tracks and 
-                Interactive simulations. <Link to="/signup" className="links"> Create an account </Link> or <Link to="/login" className="links"> Login</Link> to save your experiences within
+                Interactive simulations. <Link to="/auth" className="links"> Create an account </Link> or <Link to="/auth" className="links"> Login</Link> to save your experiences within
                 this platform.
             </p>
         </section>
