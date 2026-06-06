@@ -1,155 +1,238 @@
-/*main css used across the pages. literally just taken from my doc*/
-
+/*colour scheme updated for a new darker feel..*/
 :root {
-  /*main colours*/
-  --absa-red: #D2002A;
-  --deep-maroon: #6A0D25;
+  /* brand colour */
+  --absa-red: #7A0C1A;
 
-  /*secondary colours*/
-  --beige: #F5E6D3;
-  --sand: #E8D3B9;
-  --soft-grey: #D1D5DB;
+  /* darker theme, so darker bgs */
+  --bg-dark: #0F0F0F;
+  --bg-dark-alt: #1A1A1A;
 
-  /*blues*/
-  --muted-blue: #6b8ca6;
-  --slate-blue: #4a6a85;
+  /* surfaces */
+  --surface-1: #2A2A2A;
+  --surface-2: #3A3A3A;
 
-  /*idk why i made gradients.*/
-  --gradient-rose-cream: linear-gradient(92deg, #f8c8dc, #fff5e1);
-  --gradient-maroon-blush: linear-gradient(89deg, #6a0d25, #f4a6b8);
+  /* text colours */
+  --text-main: #F5F5F5;
+  --text-muted: #C9C9C9;
+  --text-soft: #9A9A9A;
 
-  /*functionnal colours*/ 
-  --positive-green: #2e7d32;
-  --warning-amber: #f9a825;
-  --emergency-red: #c62828;
+  /* accents, just for flavour */
+  --accent-gold: #C9A86A;
+  --accent-mint: #A3E4C1;
+  --accent-amber: #F2C94C;
 
-  /*font and typogrgraphy*/
-  --main-font: "DM Serif Display", serif;
+  /* border colours */
+  --border-subtle: #3F3F3F;
 
-  /*spacing*/
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
+  /* fonts */
+  --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* spacing */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
-  --space-xl: 2.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
 
-  /*border radiuses*/
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
+  /* radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
 
-  /*shadows*/
-  --soft-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  /* shadows */
+  --shadow-soft: 0 0.125rem 0.375rem rgba(0,0,0,0.2);
+  --shadow-medium: 0 .25rem 0.75rem rgba(0,0,0,0.3);
 }
 
 .profile-page {
   max-width: 75rem;
   margin: 0 auto;
-  padding: var(--space-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  color: var(--text-main);
+  animation: fadeIn 0.6s ease;
 }
 
-.profile-title {
-  color: var(--deep-maroon);
-  font-size: 2rem;
-  margin-bottom: var(--space-xl);
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-1);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: var(--space-2xl);
+}
+
+.profile-avatar {
+  width: 5rem;
+  height: 5rem;
+  background: var(--surface-2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border: 0.125rem solid var(--accent-gold);
+}
+
+.profile-header-info h1 {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-xs);
+}
+
+.profile-header-info p {
+  color: var(--text-muted);
+}
+
+.edit-btn {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--accent-mint);
+  color: var(--bg-dark);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: var(--accent-gold);
+  transform: translateY(-0.15rem);
 }
 
 .profile-layout {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: var(--space-xl);
-  align-items: flex-start;
 }
 
-.profile-left {
-  flex: 1;
+@media (max-width: 60rem) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*left sidebar*/
+.profile-sidebar {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
 }
 
-.profile-icon {
-  width: 6rem;
-  height: 6rem;
-  background: var(--soft-grey);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* WHY WONT IT GO TO THE CENTREEEEEEEEEEEEE*/
-  font-size: 3rem;
-  border: 0.2rem solid var(--muted-blue);
-  margin-bottom: var(--space-md);
+.profile-card {
+  background: var(--surface-1);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.profile-card:hover {
+  transform: translateY(-0.15rem);
+  box-shadow: var(--shadow-medium);
+}
+
+.profile-card h3 {
+  margin-bottom: var(--space-xs);
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+}
+
+.profile-card p {
+  color: var(--text-muted);
+}
+
+/*right side*/
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.profile-section {
+  background: var(--surface-1);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.profile-section h2 {
+  margin-bottom: var(--space-md);
+  font-size: 1.4rem;
+  color: var(--accent-gold);
+}
+
+/*input fields*/
 .profile-field {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
+  margin-bottom: var(--space-md);
 }
 
 .profile-field label {
-  font-weight: bold;
-  color: var(--deep-maroon);
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .profile-field input {
   padding: var(--space-sm);
+  background: var(--surface-2);
+  border: 0.0625rem solid var(--border-subtle);
   border-radius: var(--radius-md);
-  border: 0.1rem solid var(--soft-grey);
+  color: var(--text-main);
+  font-size: 1rem;
+  transition: border 0.2s ease, background 0.2s ease;
 }
 
-.profile-box {
-  background: var(--beige);
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
-  border: 0.2rem solid var(--sand);
-  box-shadow: var(--soft-shadow);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/*when its not editable */
+.profile-field input[readonly] {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.profile-box:hover {
-  transform: translateY(-.25rem);
-  box-shadow: 0 0.375rem 1rem rgba(0,0,0,0.12);
+/*when field is editable */
+.profile-field input:not([readonly]):focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  background: var(--surface-1);
 }
 
-.profile-box h3 {
-  color: var(--deep-maroon);
-  margin-bottom: var(--space-sm);
+.save-btn {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
 }
 
-.profile-right {
-  flex: 2;
-  background: var(--soft-grey);
-  padding: var(--space-xl);
-  border-radius: var(--radius-lg);
-  border: 0.2rem solid var(--muted-blue);
-  box-shadow: var(--soft-shadow);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.section-title {
-  color: var(--deep-maroon);
-  margin-bottom: var(--space-sm);
-}
-
-.saved-income-display {
-  margin-bottom: var(--space-md);
-  font-weight: bold;
-  color: var(--deep-maroon);
+.save-btn:hover {
+  background: var(--accent-amber);
+  transform: translateY(-0.15rem);
 }
 
 .save-confirm {
   margin-top: var(--space-sm);
-  color: var(--positive-green);
-  font-weight: bold;
+  color: var(--accent-mint);
+  font-weight: 600;
+  text-align: center;
 }
 
-input {
-  background-color: white;
-  color: var(--absa-red);
-  font-weight: bold;
-  border: 0.16rem solid var(--muted-blue);
-  font-size: .75rem;
+/*anims*/
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
 }

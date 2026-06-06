@@ -1,258 +1,336 @@
-/*main css used across the pages. literally just taken from my doc*/
-
+/*colour scheme updated for a new darker feel..*/
 :root {
-  /*main colours*/
-  --absa-red: #D2002A;
-  --deep-maroon: #6A0D25;
+  /* brand colour */
+  --absa-red: #7A0C1A;
 
-  /*secondary colours*/
-  --beige: #F5E6D3;
-  --sand: #E8D3B9;
-  --soft-grey: #D1D5DB;
+  /* darker theme, so darker bgs */
+  --bg-dark: #0F0F0F;
+  --bg-dark-alt: #1A1A1A;
 
-  /*blues*/
-  --muted-blue: #6b8ca6;
-  --slate-blue: #4a6a85;
+  /* surfaces */
+  --surface-1: #2A2A2A;
+  --surface-2: #3A3A3A;
 
-  /*idk why i made gradients.*/
-  --gradient-rose-cream: linear-gradient(92deg, #f8c8dc, #fff5e1);
-  --gradient-maroon-blush: linear-gradient(89deg, #6a0d25, #f4a6b8);
+  /* text colours */
+  --text-main: #F5F5F5;
+  --text-muted: #C9C9C9;
+  --text-soft: #9A9A9A;
 
-  /*functionnal colours*/ 
-  --positive-green: #2e7d32;
-  --warning-amber: #f9a825;
-  --emergency-red: #c62828;
+  /* accents, just for flavour */
+  --accent-gold: #C9A86A;
+  --accent-mint: #A3E4C1;
+  --accent-amber: #F2C94C;
 
-  /*font and typogrgraphy*/
-  --main-font: "DM Serif Display", serif;
+  /* border colours */
+  --border-subtle: #3F3F3F;
 
-  /*spacing*/
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
+  /* fonts */
+  --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* spacing */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
-  --space-xl: 2.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
 
-  /*border radiuses*/
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
+  /* radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
 
-  /*shadows*/
-  --soft-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  /* shadows */
+  --shadow-soft: 0 0.125rem 0.375rem rgba(0,0,0,0.2);
+  --shadow-medium: 0 .25rem 0.75rem rgba(0,0,0,0.3);
 }
-
-/*just realised that i repeat this on all css files... will change later if i remember*/
 .simstudio-page {
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: var(--space-xl);
-
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+  color: var(--text-main);
+  animation: fadeIn 0.5s ease;
 }
 
 .simstudio-title {
-    text-align: left;
-    margin-bottom: var(--space-xl);
-    color: var(--absa-red);
-    font-size: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: var(--space-xl);
 }
 
 .simstudio-layout {
-    display: flex;
-    gap: var(--space-xl);
-    align-items: flex-start;
-    margin-bottom: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
 }
 
+@media (max-width: 55rem) {
+  .simstudio-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*inputs*/
 .inputs-container {
-    flex: 1;
-    background: var(--soft-grey);
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 0.2rem solid var(--muted-blue);
-    box-shadow: var(--medium-shadow);
+  background: var(--surface-1);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
 }
 
 .inputs-container h2 {
-    color: var(--deep-maroon);
-    margin-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+  font-size: 1.4rem;
 }
 
 .input-group {
-    margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .input-group label {
-    font-weight: bold;
-    color: var(--deep-maroon);
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
-.input-group input[type="range"] {
-    width: 100%;
-    margin-top: var(--space-xs);
+.input-group input {
+  width: 100%;
+  padding: var(--space-sm);
+  background: var(--surface-2);
+  border: 0.0625rem solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  font-size: 1rem;
 }
 
-.input value {
-    color: var(--slate-blue);
-    font-size: 0.9rem;
-    margin-top: var(--space-xs);
+.input-group input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
 }
 
-.outputs-container {
-    flex: 1.2;
-    background: var(--beige);
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 0.2rem solid var(--muted-blue);
-    box-shadow: var(--soft-shadow);
-}
-
-.outputs-container h2 {
-    color: var(--deep-maroon);
-    margin-bottom: var(--space-md);
-}
-
-.output-bar {
-    margin-bottom: var(--space-md);
-}
-
-.output-bar p {
-    font-weight: bold;
-    color: var(--deep-maroon);
-    margin-bottom: var(--space-xs);
-}
-
-.dual-bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.75rem;
-    height: 7.5rem; 
-    margin-top: var(--space-sm);
-}
-
-.bar {
-    width: 40%;
-    border-radius: var(--radius-sm);
-    transition: height 0.4s ease;
-}
-
-.rent-bar {
-    background: var(--muted-blue);
-}
-
-.bond-bar {
-    background: var(--absa-red);
-}
-
-.bar-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.25rem;
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-.verdic-box {
-    margin-top: var(--space-lg);
-    background: var(--gradient-rose-cream);
-    padding: var(--space-md);
-    border-radius: var(--radius-lg);
-    border: 0.2rem solid var(--deep-maroon);
-    text-align: center;
-}
-
-.verdic-box h3 {
-    color: var(--deep-maroon);
-    margin-bottom: var(--space-xs);
-}
-
-.simstudio-btns {
-    margin-top: var(--space-xl);
-    display: flex;
-    justify-content: space-around;
-    gap: var(--space-lg);
-}
-
-.loading-box {
-    background: var(--beige);
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    text-align: center;
-    border: 0.2rem solid var(--muted-blue);
-    animation: pulse 1.2s infinite ease-in-out;
-}
-
-.education-box {
-    background: var(--beige);
-    padding: var(--space-xl);
-    border-radius: var(--radius-lg);
-     border: 0.2rem solid var(--sand);
-    box-shadow: var(--soft-shadow);
-    margin-top: var(--space-xl);
-    line-height: 1.6;
-}
-
-.education-box h3,
-.education-box h4 {
-    color: var(--deep-maroon);
-    margin-bottom: var(--space-sm);
-}
-
-.education-box ul {
-    margin-left: var(--space-md);
-    margin-bottom: var(--space-md);
-}
-
-.education-box li {
-    margin-bottom: var(--space-xs);
-}
-
-.explainer-tiles {
-    display: flex;
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
-}
-
-.explainer-tile {
-    flex: 1;
-    background: white;
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 0.15rem solid var(--muted-blue);
-    box-shadow: var(--soft-shadow);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.explainer-tile:hover {
-    transform: translateY(-.25rem);
-    box-shadow: var(--medium-shadow);
-}
-
-.explainer-tile h4 {
-    color: var(--deep-maroon);
-    margin-bottom: var(--space-xs);
-}
-
-/*kanimations*/
-
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(0625rem); }
-    to { opacity: 1; transform: translateY(0); }
+.input-value {
+  margin-top: var(--space-xs);
+  font-weight: 600;
+  color: var(--accent-gold);
 }
 
 .calculate-btn {
-    margin-top: var(--space-lg);
-    width: 100%;
-    font-size: 1.1rem;
+  width: 100%;
+  padding: var(--space-sm);
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.calculate-btn:hover {
+  background: var(--accent-amber);
+  transform: translateY(-0.15rem);
+}
+
+/*outputs*/
+.outputs-container {
+  background: var(--surface-1);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.outputs-container h2 {
+  margin-bottom: var(--space-md);
+  font-size: 1.4rem;
+}
+
+.loading-msg {
+  color: var(--accent-mint);
+  font-weight: 600;
+}
+
+/*overall chart */
+.year-bars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.output-bar {
+  text-align: center;
+}
+
+.bar-pair {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-sm);
+  height: 10rem;
+  margin-top: var(--space-sm);
+}
+
+.bar {
+  width: 1.5rem;
+  border-radius: var(--radius-sm);
+  transition: height 0.4s ease;
+}
+
+/*bar colours */
+.rent-bar {
+  background: var(--accent-amber);
+}
+
+.bond-bar {
+  background: var(--accent-mint);
+}
+
+.lifestyle-bar {
+  background: var(--accent-amber);
+}
+
+.investing-bar {
+  background: var(--accent-mint);
+}
+
+.local-bar {
+  background: var(--accent-gold);
+}
+
+.offshore-bar {
+  background: var(--accent-mint);
+}
+
+.bar-labels {
+  margin-top: var(--space-xs);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/*verdict */
+.verdict-box {
+  margin-top: var(--space-xl);
+  background: var(--surface-2);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.verdict-box h3 {
+  margin-bottom: var(--space-sm);
+  font-size: 1.3rem;
+  color: var(--accent-gold);
+}
+
+/*larn smth smth*/
+.education-box {
+  background: var(--surface-1);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: var(--space-2xl);
+}
+
+.education-box h3 {
+  margin-bottom: var(--space-sm);
+  font-size: 1.3rem;
+}
+
+.education-box h4 {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+  font-size: 1.1rem;
+}
+
+.education-box p,
+.education-box li {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/*explainery*/
+.explainer-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.explainer-tile {
+  background: var(--surface-2);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.explainer-tile:hover {
+  transform: translateY(-0.15rem);
+  box-shadow: var(--shadow-medium);
+}
+
+.explainer-tile h4 {
+  margin-bottom: var(--space-xs);
+  font-size: 1.1rem;
+}
+
+.simstudio-btns {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.btn-too {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--accent-mint);
+  color: var(--bg-dark);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.btn-too:hover {
+  background: var(--accent-gold);
+  transform: translateY(-0.15rem);
+}
+
+.btn-wan {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.btn-wan:hover {
+  background: var(--accent-amber);
+  transform: translateY(-0.15rem);
+}
+
+/*ANIMS*/
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -42,165 +42,203 @@ function MoneySnapshot() {
 
     return(
         <div className="snapshot-page">
-            <h1 className="snapshot-title"> Money Snapshot Dashboard </h1>
+
+            {/*added a page header to look...more*/}
+            <header className="snapshot-header">
+                <h1>Money Snapshot Dashboard</h1>
+                <p>Your personalised monthly financial overview</p>
+            </header>
 
             {/*inputs*/}
-            <div className="snapshot-inputs">
-                <h2>Your Inputs</h2>
+            <section className="snapshot-section">
+                <div className="section-inner">
+                    <h2 className="section-title">Your Inputs</h2>
+                    <div className="inputs-grid">
+                        {/* income */}
+                        <div className="input-card">
+                            <label>Monthly Income</label>
+                            <input
+                            type="number"
+                            min="0"
+                            max="60000"
+                            value={income}
+                            onChange={(e) => setIncome(Number(e.target.value))}
+                            className="input-field"
+                            />
+                            <p className="input-value">R {income.toLocaleString()}</p>
+                        </div>
 
-                <div className="input-group">
-                    <label>Monthly Income</label>
-                    <input type="range" min="0" max="60000" value={income}
-                        onChange={(e) => setIncome(Number(e.target.value))} />
-                    <p>R {income.toLocaleString()}</p>
-                </div>
+                        {/*expenses */}
+                        <div className="input-card">
+                            <label>Monthly Expenses</label>
+                            <input
+                            type="number"
+                            min="0"
+                            max="60000"
+                            value={expenses}
+                            onChange={(e) => setExpenses(Number(e.target.value))}
+                            className="input-field"
+                            />
+                            <p className="input-value">R {expenses.toLocaleString()}</p>
+                        </div>
 
-                <div className="input-group">
-                    <label>Monthly Expenses</label>
-                    <input type="range" min="0" max="60000" value={expenses}
-                        onChange={(e) => setExpenses(Number(e.target.value))} />
-                    <p>R {expenses.toLocaleString()}</p>
-                </div>
+                        {/*debts*/}
+                        <div className="input-card">
+                            <label>Debt Repayments</label>
+                            <input
+                            type="number"
+                            min="0"
+                            max="20000"
+                            value={debt}
+                            onChange={(e) => setDebt(Number(e.target.value))}
+                            className="input-field"
+                            />
+                            <p className="input-value">R {debt.toLocaleString()}</p>
+                        </div>
 
-                <div className="input-group">
-                    <label>Debt Repayments</label>
-                    <input type="range" min="0" max="20000" value={debt}
-                        onChange={(e) => setDebt(Number(e.target.value))} />
-                    <p>R {debt.toLocaleString()}</p>
-                </div>
-
-                <div className="input-group">
-                    <label>Monthly Savings</label>
-                    <input type="range" min="0" max="20000" value={savings}
-                        onChange={(e) => setSavings(Number(e.target.value))} />
-                    <p>R {savings.toLocaleString()}</p>
-                </div>
-            </div>
-
-            <button 
-                className="save-btn"
-                onClick={() => setUserIncome(income)}
-                >
-                Save to Profile
-            </button>
-            {userIncome === income && (
-                <p className="saved-msg">Saved!</p>
-            )}
-
-
-            <div className="snapshot-row top-row">
-                {/*first; month at a glance*/}
-                <section className="snapshot-card">
-                    <h2> Your Month at a Glance </h2>
-                     <div className="glance-values">
-                        <p>Income: <strong>R {income.toLocaleString()}</strong></p>
-                        <p>Expenses: <strong>R {expenses.toLocaleString()}</strong></p>
-                        <p className={`verdict ${verdictClass}`}>
-                        Net Cash Flow: R {netCashFlow.toLocaleString()}
-                        </p>
+                        {/* saving*/}
+                        <div className="input-card">
+                            <label>Monthly Savings</label>
+                            <input
+                            type="number"
+                            min="0"
+                            max="20000"
+                            value={savings}
+                            onChange={(e) => setSavings(Number(e.target.value))}
+                            className="input-field"
+                            />
+                            <p className="input-value">R {savings.toLocaleString()}</p>
+                        </div>
                     </div>
+
+                    <button className="btn-primary save-btn" onClick={() => setUserIncome(income)}>
+                    Save to Profile?
+                    </button>
+                    {userIncome === income && <p className="saved-msg">Saved!</p>}
+                </div>
+            </section>
+
+            {/*the snapshot summary*/}
+            <section className="snapshot-section">
+                <div className="section-inner">
+                    <h2 className="section-title">Your Monthly Overview</h2>
+                    <div className="summary-grid">
+                        {/*first; month at a glance*/}
+                        <div className="summary-card">
+                            <h3>Your Month at a Glance</h3>
+                            <div className="summary-values">
+                                <p>Income: <strong>R {income.toLocaleString()}</strong></p>
+                                <p>Expenses: <strong>R {expenses.toLocaleString()}</strong></p>
+                                <p className={`verdict ${verdictClass}`}>
+                                    Net Cash Flow: R {netCashFlow.toLocaleString()}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/*key finances...why did i make this page so elaborate 😭*/}
+                        <div className="summary-card">
+                            <h3>Key Finances</h3>
+                            <div className="key-finances">
+                                <div className="finance-box">
+                                    <p>Savings Rate</p>
+                                    <strong>{savingsRate}%</strong>
+                                </div>
+                                <div className="finance-box">
+                                    <p>Debt-to-Income</p>
+                                    <strong>{debtToIncome}%</strong>
+                                </div>
+                                <div className="finance-box">
+                                    <p>Net Cash Flow</p>
+                                    <strong>R {netCashFlow.toLocaleString()}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </section>
 
-                {/*spending breakdown*/}
-                <section className="snapshot-card">
-                    <h2> Spending Breakdown</h2>
+            {/*the spending breakdawn*/}
+            <section className="snapshot-section">
+                <div className="section-inner">
+                    <h2 className="section-title">Spending Breakdown</h2>
                     <div className="breakdown-grid">
-                        <div className="breakdown-item"> Housing</div>
-                        <div className="breakdown-item"> Transport</div>
-                        <div className="breakdown-item"> Debt</div>
-                        <div className="breakdown-item"> Subscriptions</div>
-                        <div className="breakdown-item"> Groceries</div>
-                        <div className="breakdown-item"> Savings</div> 
+                        <div className="breakdown-item">Housing</div>
+                        <div className="breakdown-item">Transport</div>
+                        <div className="breakdown-item">Debt</div>
+                        <div className="breakdown-item">Subscriptions</div>
+                        <div className="breakdown-item">Groceries</div>
+                        <div className="breakdown-item">Savings</div>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                {/*key finances...why did i make this page so elaborate 😭*/}
-                <section className="snapshot-card">
-                    <h2> Key Finances </h2>
-                    <div className="key-finances">
-                        <div className="finance-box">
-                            {/*some fake values for now ☠️*/}
-                            <p>Savings Rate</p>
-                            <strong>{savingsRate}%</strong>
+            {/* goals + insights*/}
+            <section className="snapshot-section">
+                <div className="section-inner">
+                    <h2 className="section-title">Insights & Goals</h2>
+                    <div className="insights-grid">
+
+                        {/* Insights */}
+                        <div className="insights-card">
+                            <h3>Insights</h3>
+                            <ul>
+                            <li>Your savings rate is {savingsRate}%. SA professionals aim for 10–20%.</li>
+                            <li>Debt-to-income ratio is {debtToIncome}%. Banks prefer below 40%.</li>
+                            <li>{verdict}</li>
+                            </ul>
                         </div>
-
-                        <div className="finance-box">
-                            <p>Debt-to-Income</p>
-                            <strong>{debtToIncome}%</strong>
-                        </div>
-
-                        <div className="finance-box">
-                            <p>Net Cash Flow</p>
-                            <strong>R {netCashFlow.toLocaleString()}</strong>
+                        {/* Goals */}
+                        <div className="insights-card">
+                            <h3>Your Goals</h3>
+                            <p>Emergency Fund: 3–6 months of expenses recommended.</p>
+                            <p>Reduce debt to improve affordability.</p>
+                            <p>Increase savings rate over time.</p>
                         </div>
                     </div>
-                </section>
-            </div>
-
-              {/* goals + insights*/}
-            <div className="snapshot-row bottom-row">
-                
-                {/*the insidhts*/}
-                <section className="snapshot-card">
-                    <h2> Insights</h2>
-
-                    <ul className="insights-list">
-                        <li>
-                            Your savings rate is {savingsRate}%. SA professionals aim for 10–20%.
-                        </li>
-                        <li>
-                            Debt-to-income ratio is {debtToIncome}%. Banks prefer below 40%.
-                        </li>
-                        <li>{verdict}</li>
-                    </ul>
-                </section>
-                
-                
-                {/*the goals*/}
-                <section className="snapshot-card">
-                    <h2> Your Goals</h2>
-
-                    <p>Emergency Fund: 3–6 months of expenses recommended.</p>
-                    <p>Reduce debt to improve affordability.</p>
-                    <p>Increase savings rate over time.</p>
-                </section>
-            </div>
+                </div>
+            </section>
 
             {/*teach the usar smth smth*/}
-            <div className="learn-section">
-                <h2>Learn: Understanding Your Money Snapshot</h2>
-                <p>
-                Your financial snapshot helps you understand how much money you keep after expenses,
-                how much you save, and how much debt you carry. These numbers influence your ability
-                to invest, buy property, or build long-term wealth.
-                </p>
-                <p>
-                In South Africa, major fixed costs include transport, electricity, medical aid,
-                and housing. Tracking these helps you stay in control of your budget.
-                </p>
-                <p>
-                A healthy financial foundation starts with a surplus, manageable debt, and consistent savings.
-                </p>
-            </div>
+           <section className="snapshot-section">
+                <div className="section-inner learn-card">
+                    <h2 className="section-title">Learn: Understanding Your Money Snapshot</h2>
+                    <p>
+                    Your financial snapshot helps you understand how much money you keep after expenses,
+                    how much you save, and how much debt you carry.
+                    </p>
+                    <p>
+                    In South Africa, major fixed costs include transport, electricity, medical aid,
+                    and housing.
+                    </p>
+                    <p>
+                    A healthy financial foundation starts with a surplus, manageable debt, and consistent savings.
+                    </p>
+                </div>
+            </section>
 
             {/*explainery cardz*/}
-            <div className="explainer-tiles">
-                <div className="explainer-tile">
+            <section className="snapshot-section">
+                <div className="section-inner explainer-grid">
+
+                    <div className="explainer-tile">
                     <h4>Emergency Fund</h4>
                     <p>A buffer covering 3–6 months of expenses.</p>
                     </div>
+
                     <div className="explainer-tile">
                     <h4>Net Cash Flow</h4>
                     <p>Your leftover money after expenses.</p>
                     </div>
+
                     <div className="explainer-tile">
                     <h4>Debt-to-Income</h4>
                     <p>How much of your income goes to debt.</p>
+                    </div>
+
                 </div>
-            </div>
+            </section>
           
         </div>
-
     );
 }
 
