@@ -16,10 +16,15 @@
   --text-muted: #C9C9C9;
   --text-soft: #9A9A9A;
 
-  /* accents, just for flavour */
+  /* accents */
   --accent-gold: #C9A86A;
   --accent-mint: #A3E4C1;
   --accent-amber: #F2C94C;
+
+  /* NEW: chart colours */
+  --chart-blue: #6AB4F8;
+  --chart-red: #E57373;
+  --chart-purple: #C39BD3;
 
   /* border colours */
   --border-subtle: #3F3F3F;
@@ -143,6 +148,15 @@
   transform: translateY(-0.15rem);
 }
 
+/* the popup message */
+.save-confirm {
+  margin-top: var(--space-md);
+  color: var(--accent-mint);
+  font-weight: 600;
+  text-align: center;
+}
+
+
 /*metrics */
 .metrics-grid {
   display: grid;
@@ -168,78 +182,68 @@
   font-size: 1.2rem;
 }
 
-/*doughtnut chart */
-.donut-wrapper {
+/*bar chart */
+.bar-chart-wrapper {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) 0;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-lg);
+}
+
+.bar-item {
+  text-align: center;
+  width: 4rem;
+}
+
+.bar-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.bar {
+  width: 100%;
+  height: 10rem;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  border: 0.0625rem solid var(--border-subtle);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.bar-fill {
+  width: 100%;
+  transition: height 0.4s ease;
+  border-radius: var(--radius-sm);
+}
+
+/*graph fill colours*/
+.bar-fill.gold { background: var(--accent-gold); }
+.bar-fill.mint { background: var(--accent-mint); }
+.bar-fill.blue { background: var(--chart-blue); }
+.bar-fill.red { background: var(--chart-red); }
+.bar-fill.purple { background: var(--chart-purple); }
+
+.bar-item span {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/*insights + learn side by side*/
+.insights-learn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
-  flex-wrap: wrap;
 }
 
-.donut-chart {
-  width: 16rem;
-  height: 16rem;
-  border-radius: 50%;
-  position: relative;
-  border: 0.15rem solid var(--border-subtle);
-  box-shadow: 0 0 1rem rgba(201, 168, 106, 0.15);
-
-  /*doughnut colours not showing whyy T^T*/
-  background: conic-gradient(
-    var(--accent-gold) 0deg,
-    var(--accent-mint) 90deg,
-    var(--accent-blue) 180deg,
-    var(--accent-red) 270deg,
-    var(--accent-purple) 360deg
-  );
-
-  /*anims for doughnut */
-  animation: donutSpin 1.2s ease-out, reveal 1.2s ease forwards;
-
-  /*hole mask */
-  mask: radial-gradient(circle at center, transparent 30%, black 31%);
-  -webkit-mask: radial-gradient(circle at center, transparent 30%, black 31%);
-}
-
-.donut-chart::after {
-  content: "";
-  position: absolute;
-  inset: 3rem;
-  background: var(--bg-dark);
-  border-radius: 50%;
-}
-
-.donut-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--accent-gold);
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.donut-legend {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.dot {
-  display: inline-block;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  margin-right: 0.5rem;
-}
-
-.dot.gold { background: var(--accent-gold); }
-.dot.mint { background: var(--accent-mint); }
-.dot.blue { background: #6AB4F8; }
-.dot.red { background: #E57373; }
-.dot.purple { background: #C39BD3; }
-
-/*insight*/
 .insights-card {
   background: var(--surface-2);
   padding: var(--space-xl);
@@ -259,6 +263,14 @@
   color: var(--text-muted);
 }
 
+.learn-card {
+  background: var(--surface-2);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
 .learn-card p {
   margin-bottom: var(--space-sm);
   color: var(--text-muted);
@@ -268,20 +280,4 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(0.75rem); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes donutSpin {
-  from {
-    transform: rotate(-20deg) scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes reveal {
-  from { mask-size: 0%; }
-  to { mask-size: 100%; }
 }

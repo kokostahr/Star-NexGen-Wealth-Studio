@@ -13,16 +13,15 @@ function MoneySnapshot() {
     //context related for income
     const { userIncome, setUserIncome } = useContext(UserContext);
     const { isLoggedIn } = useContext(UserContext);
-    
-
 
     //input states with localStorage laod
-    const [grossIncome, setGrossIncome] = useState(userIncome || 0);
+    const [grossIncome, setGrossIncome] = useState(0);
     const [housing, setHousing] = useState(0);
     const [mobility, setMobility] = useState(0);
     const [lifestyle, setLifestyle] = useState(0);
     const [debt, setDebt] = useState(0);
     const [savings, setSavings] = useState(0);
+    const [showSavedMsg, setShowSavedMsg] = useState(false);
 
     //load the saved monisnapshot
     useEffect(() => {
@@ -99,11 +98,11 @@ function MoneySnapshot() {
         insights.push("Your financial position looks balanced. Keep building good habits.");
     }
 
-    //douhgnut churt stuff
+    //bar chart percentages
     const totalForChart = housing + mobility + lifestyle + debt + savings;
     const housingPct = totalForChart ? (housing / totalForChart) * 100 : 0;
     const mobilityPct = totalForChart ? (mobility / totalForChart) * 100 : 0;
-    const lifestylePct = totalForChart ? (lifestyle / totalForChart) * 100 : 0;
+    const lifestylePct2 = totalForChart ? (lifestyle / totalForChart) * 100 : 0;
     const debtPct = totalForChart ? (debt / totalForChart) * 100 : 0;
     const savingsPct = totalForChart ? (savings / totalForChart) * 100 : 0;
 
@@ -190,17 +189,27 @@ function MoneySnapshot() {
                         </div>
                     </div>
 
-                    <button className="btn-primary save-btn" onClick={() => setUserIncome(grossIncome)}>
-                    Save Income to Profile
+                   <button
+                        className="btn-primary save-btn"
+                        onClick={() => {
+                            setUserIncome(grossIncome);
+                            setShowSavedMsg(true);
+                            setTimeout(() => setShowSavedMsg(false), 2000);
+                        }}
+                    >
+                        Save Income to Profile
                     </button>
 
-
+                    {showSavedMsg && (
+                        <p className="save-confirm fade-in">Income saved successfully!</p>
+                    )}
                 </div>
             </section>
 
-            {/*metrics grid*/}
-             <section className="snapshot-section">
+            {/*metrics + bar chart stacked*/}
+            <section className="snapshot-section">
                 <div className="section-inner">
+
                     <h2 className="section-title">Key Financial Metrics</h2>
 
                     <div className="metrics-grid">
@@ -234,70 +243,87 @@ function MoneySnapshot() {
                             <strong>{lifestylePercent}%</strong>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            {/*doughntu chart*/}
-            <section className="snapshot-section">
-                <div className="section-inner">
-                    <h2 className="section-title">Spending Breakdown</h2>
+                    {/*bar chart*/}
+                    <h2 className="section-title" style={{ marginTop: "2rem" }}>Spending Breakdown</h2>
 
-                    <div className="donut-wrapper">
-                        <div className="donut-chart"
-                        style={{
-                            background: `
-                            conic-gradient(
-                                var(--accent-gold) 0% ${housingPct}%,
-                                var(--accent-mint) ${housingPct}% ${housingPct + mobilityPct}%,
-                                var(--accent-blue) ${housingPct + mobilityPct}% ${housingPct + mobilityPct + lifestylePct}%,
-                                var(--accent-red) ${housingPct + mobilityPct + lifestylePct}% ${housingPct + mobilityPct + lifestylePct + debtPct}%,
-                                var(--accent-purple) ${housingPct + mobilityPct + lifestylePct + debtPct}% 100%
-                            )
-                            `
-                        }}
-                        >
-                            <div className="donut-center">
-                                {Math.round((totalExpenses / netIncome) * 100)}%
+                    <div className="bar-chart-wrapper">
+
+                        <div className="bar-chart">
+
+                            <div className="bar-item">
+                                <p>Housing</p>
+                                <div className="bar">
+                                    <div className="bar-fill gold" style={{ height: `${housingPct}%` }}></div>
+                                </div>
+                                <span>{housingPct.toFixed(1)}%</span>
                             </div>
+
+                            <div className="bar-item">
+                                <p>Mobility</p>
+                                <div className="bar">
+                                    <div className="bar-fill mint" style={{ height: `${mobilityPct}%` }}></div>
+                                </div>
+                                <span>{mobilityPct.toFixed(1)}%</span>
+                            </div>
+
+                            <div className="bar-item">
+                                <p>Lifestyle</p>
+                                <div className="bar">
+                                    <div className="bar-fill blue" style={{ height: `${lifestylePct2}%` }}></div>
+                                </div>
+                                <span>{lifestylePct2.toFixed(1)}%</span>
+                            </div>
+
+                            <div className="bar-item">
+                                <p>Debt</p>
+                                <div className="bar">
+                                    <div className="bar-fill red" style={{ height: `${debtPct}%` }}></div>
+                                </div>
+                                <span>{debtPct.toFixed(1)}%</span>
+                            </div>
+
+                            <div className="bar-item">
+                                <p>Savings</p>
+                                <div className="bar">
+                                    <div className="bar-fill purple" style={{ height: `${savingsPct}%` }}></div>
+                                </div>
+                                <span>{savingsPct.toFixed(1)}%</span>
+                            </div>
+
                         </div>
 
-                        <div className="donut-legend">
-                            <p><span className="dot gold"></span> Housing</p>
-                            <p><span className="dot mint"></span> Mobility</p>
-                            <p><span className="dot blue"></span> Lifestyle</p>
-                            <p><span className="dot red"></span> Debt</p>
-                            <p><span className="dot purple"></span> Savings</p>
-                        </div>
                     </div>
 
                 </div>
             </section>
 
-            {/*insights*/}
-            <section className="snapshot-section">
-                <div className="section-inner">
-                    <h2 className="section-title">Insights</h2>
 
-                    <div className="insights-card">
+            {/*insights and learn side-bye-side (updating the layout i dont like how it looks)*/}
+            <section className="snapshot-section">
+                <div className="insights-learn-grid">
+
+                    {/*insights*/}
+                    <div className="section-inner insights-card">
+                        <h2 className="section-title">Insights</h2>
                         <ul>
-                        {insights.map((i, index) => (
-                            <li key={index}>{i}</li>
-                        ))}
+                            {insights.map((i, index) => (
+                                <li key={index}>{i}</li>
+                            ))}
                         </ul>
                     </div>
+
+                    {/*learn*/}
+                    <div className="section-inner learn-card">
+                        <h2 className="section-title">Learn: Understanding Your Snapshot</h2>
+                        <p>Your Money Snapshot helps you understand how your income is allocated across essential categories.</p>
+                        <p>In South Africa, major fixed costs include housing, transport, medical aid, and electricity.</p>
+                        <p>A strong financial foundation includes a surplus, manageable debt, and consistent savings.</p>
+                    </div>
+
                 </div>
             </section>
 
-            {/*teach the usar smth nyana */}
-             <section className="snapshot-section">
-                <div className="section-inner learn-card">
-                    <h2 className="section-title">Learn: Understanding Your Snapshot</h2>
-                    <p>Your Money Snapshot helps you understand how your income is allocated across essential categories.</p>
-                    <p>In South Africa, major fixed costs include housing, transport, medical aid, and electricity.</p>
-                    <p>A strong financial foundation includes a surplus, manageable debt, and consistent savings.</p>
-                </div>
-            </section>
-            
         </div>
     );
 }
