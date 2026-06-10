@@ -20,7 +20,7 @@ import { UserContext } from "../context/UserContext";
 
 function AuthPage() {
     //using context to store the username in a dynamic but kinda static way xD
-    const { setUserName, setUserEmail } = useContext(UserContext);
+    const { setUserName, setUserEmail, setIsLoggedIn } = useContext(UserContext);
 
     //need the variables so that the info can switch ofc
     const [isLogin, setIsLogin] = useState(false);
@@ -89,39 +89,53 @@ function AuthPage() {
         }
 
         if (Object.keys(validationErrors).length === 0) {
-            setGeneralError("");
+        setGeneralError("");
 
-            //sucess message when things are done RIGHT
-            alert(isLogin ? "Login successful 😌🔥" : "Account Created. Welcome to NexGen!")
-            setUserName(formData.name);
-            setUserEmail(formData.email);
-            //then take the usar to the empty barebones profile for now
-            navigate("/profile");
-        }
-        
+        //sucess message when things are done RIGHT
+        alert(isLogin ? "Login successful 😌🔥" : "Account Created. Welcome to NexGen!");
+
+        //save the usar info to context
+        setUserName(formData.name);
+        setUserEmail(formData.email);
+
+        //mark the usar as logged in
+        setIsLoggedIn(true);
+
+        //save the session so navbar + tracks know the usar is logged in
+        localStorage.setItem(
+            "user-session",
+            JSON.stringify({
+                userName: formData.name,
+                userEmail: formData.email,
+                userIncome: 0, //default for now
+            })
+        );
+
+        //then take the usar to the empty barebones profile for now
+        navigate("/profile");
     }
 
-
+        
+    }
     
     //a lot of if statements to swap between the info on the page
     return (
-        <div className="auth-page">
+         <div className="auth-page">
+            {/*page title/header*/}
+            <h1 className="auth-title">{isLogin ? "Login" : "Sign Up"}</h1>
 
-            <h1 className="auth-title"> {isLogin ? "Login" : "Sign Up"}</h1>
+            {/*basic errar*/}
+            {generalError && (
+            <p className="general-error fade-in">{generalError}</p>
+            )}
 
-            {/*the error massage*/}
-            {generalError && <p className="general-error"> {generalError}</p>}
-
-
-
-            {/*form for logging \ signing in*/}
-            <form className={`auth-box ${shake ? "shake" : ""} ${isLogin ? "fade-in" : "fade-in"}`}
+            {/*the form*/}
+            <form className={`auth-box ${shake ? "shake" : ""} fade-in`}
             onSubmit={handleSubmit}>
-
-                {/*first the form for signup page*/}
+                {/*the fields for the signup page ONLY*/}
                 {!isLogin && (
-                    <>
-                        <label> Name and Surname: </label>
+                    <div className="auth-section fade-in">
+                        <label>Name and Surname</label>
                         <input
                             name="name"
                             type="text"
@@ -131,63 +145,61 @@ function AuthPage() {
                         />
                         {errors.name && <p className="field-error">{errors.name}</p>}
 
-                        <label> Cellphone Number: </label>
+                        <label>Cellphone Number</label>
                         <input
                             name="phone"
                             type="text"
-                            inputmode="numeric"
+                            inputMode="numeric"
                             placeholder="Enter your number"
                             value={formData.phone}
                             onChange={handleChange}
                         />
-                        {errors.phone && <p className="field-error"> {errors.phone}</p>}
-                    </>
+                        {errors.phone && <p className="field-error">{errors.phone}</p>}
+                    </div>
                 )}
 
-                {/*shared form fields*/}
-                <label> Email Address: </label>
-                <input
+                {/*the input fields that both sections share*/}
+                <div className="auth-section">
+                    <label>Email Address</label>
+                    <input
                     name="email"
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
-                />
-                {errors.email && <p className="field-error"> {errors.email}</p>}
+                    />
+                    {errors.email && <p className="field-error">{errors.email}</p>}
 
-                <label> Create a Password: </label>
-                <input
+                    <label>Password</label>
+                    <input
                     name="password"
                     type="password"
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleChange}
-                />
-                {errors.password && <p className="field-error"> {errors.password}</p>}
-                
-                {/*the button to submit the form*/}
+                    />
+                    {errors.password && <p className="field-error">{errors.password}</p>}
+                </div>
+
+                {/*submission btn*/}
                 <button className="auth-btn" type="submit">
-                    {isLogin ? "Login!" : "Sign Up!"}
+                    {isLogin ? "Login" : "Sign Up"}
                 </button>
 
-                {/*link to switch the form to the necessay one...*/}
-                {isLogin ? (
+                {/*link to switch between login and signup page*/}
+                <p className="auth-switch">
+                    {isLogin ? (
                     <>
-                        {/*<p className="auth-switch">
-                            Forgot your password? Click{" "} <span>here</span>
-                        </p>*/}
-                        <p className="auth-switch">
-                            Dont have an account? Click{" "} <span onClick={() => setIsLogin(false)}>here</span>
-                            {" "} to create one.
-                        </p>
+                        Don’t have an account?{" "}
+                        <span onClick={() => setIsLogin(false)}>Create one</span>
                     </>
-                ) : (
-                        <p className="auth-switch">
-                            Already have an account? Click{" "}
-                            <span onClick={() => setIsLogin(true)}>here</span>
-                            {" "} to Login.
-                    </p>
-                )}
+                    ) : (
+                    <>
+                        Already have an account?{" "}
+                        <span onClick={() => setIsLogin(true)}>Login</span>
+                    </>
+                    )}
+                </p>
 
             </form>
         </div>

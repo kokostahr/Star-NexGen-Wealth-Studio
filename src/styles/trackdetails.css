@@ -1,239 +1,341 @@
-/*main css used across the pages. literally just taken from my doc*/
-
+/*colour scheme updated for a new darker feel..*/
 :root {
-  /*main colours*/
-  --absa-red: #D2002A;
-  --deep-maroon: #6A0D25;
+  /* brand colour */
+  --absa-red: #7A0C1A;
 
-  /*secondary colours*/
-  --beige: #F5E6D3;
-  --sand: #E8D3B9;
-  --soft-grey: #D1D5DB;
+  /* darker theme, so darker bgs */
+  --bg-dark: #0F0F0F;
+  --bg-dark-alt: #1A1A1A;
 
-  /*blues*/
-  --muted-blue: #6b8ca6;
-  --slate-blue: #4a6a85;
+  /* surfaces */
+  --surface-1: #2A2A2A;
+  --surface-2: #3A3A3A;
 
-  /*idk why i made gradients.*/
-  --gradient-rose-cream: linear-gradient(92deg, #f8c8dc, #fff5e1);
-  --gradient-maroon-blush: linear-gradient(89deg, #6a0d25, #f4a6b8);
+  /* text colours */
+  --text-main: #F5F5F5;
+  --text-muted: #C9C9C9;
+  --text-soft: #9A9A9A;
 
-  /*functionnal colours*/ 
-  --positive-green: #2e7d32;
-  --warning-amber: #f9a825;
-  --emergency-red: #c62828;
+  /* accents, just for flavour */
+  --accent-gold: #C9A86A;
+  --accent-mint: #A3E4C1;
+  --accent-amber: #F2C94C;
 
-  /*font and typogrgraphy*/
-  --main-font: "DM Serif Display", serif;
+  /* border colours */
+  --border-subtle: #3F3F3F;
 
-  /*spacing*/
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
+  /* fonts */
+  --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+
+  /* spacing */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
-  --space-xl: 2.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
 
-  /*border radiuses*/
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
+  /* radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
 
-  /*shadows*/
-  --soft-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  --medium-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  /* shadows */
+  --shadow-soft: 0 0.125rem 0.375rem rgba(0,0,0,0.2);
+  --shadow-medium: 0 .25rem 0.75rem rgba(0,0,0,0.3);
 }
 
 .trackdetails-page {
-  max-width: 75rem;
+  max-width: 80rem;
   margin: 0 auto;
-  padding: var(--space-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  color: var(--text-main);
+  animation: fadeIn 0.6s ease;
+}
+
+/* the prorgress bar */
+.progress-bar-wrapper {
+  margin-bottom: var(--space-xl);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 1rem;
+  background: var(--surface-2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 0.0625rem solid var(--border-subtle);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent-gold);
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+.progress-label {
+  margin-top: var(--space-xs);
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
 .trackdetails-title {
-  text-align: left;
-  margin-bottom: var(--space-xs);
-  color: var(--absa-red);
   font-size: 2rem;
+  margin-bottom: var(--space-xs);
+  color: var(--accent-gold);
 }
 
 .trackdetails-comment {
-  text-align: left;
-  font-weight: bold;
   margin-bottom: var(--space-xl);
-  color: var(--deep-maroon);
-  font-size: 1.2rem;
+  color: var(--text-muted);
 }
 
 .trackdetails-layout {
-  display: block;
-
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
 }
 
+@media (max-width: 60rem) {
+  .trackdetails-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*years on the left side*/
 .years-container {
   display: flex;
-  gap: var(--space-md);
+  flex-direction: column;
+  gap: var(--space-xl);
   flex: 3;
-  margin-bottom: var(--space-xl);
 }
 
 .year-column {
-  flex: 1;
-  background: var(--soft-grey);
-  padding: var(--space-md);
+  background: var(--surface-1);
+  padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  border: 0.2rem solid var(--muted-blue);
-  box-shadow: var(--soft-shadow);
-  max-height: 28rem;
-  overflow-y: auto;
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .year-column:hover {
-  transform: translateY(-.25rem);
-  box-shadow: 0 .375rem 1rem rgba(0,0,0,0.12);
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-medium);
 }
 
 .year-column h2 {
-  color: var(--deep-maroon);
-  font-weight: bold;
-  font-size: 1.3rem;
+  color: var(--accent-gold);
   margin-bottom: var(--space-sm);
 }
 
-.year-column select {
-  margin-left: var(--space-xs);
-  padding: 0.25rem;
-  border-radius: var(--radius-sm);
-  border: 0.18rem solid var(--deep-maroon);
-  background: white;
-  font-size: 0.85rem;
-  font-weight: bold;
-  color: black;
-  cursor: pointer;
-}
-
 .year-section {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .year-section h3 {
-  color: var(--slate-blue);
-  text-decoration: underline;
+  color: var(--accent-mint);
   margin-bottom: var(--space-xs);
 }
 
-.year-section ul li {
-  margin-bottom: var(--space-xs);
+/* milestones */
+year-section ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-.year-column ul {
-  padding-left: 1rem;
+.year-section li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  border: 0.0625rem solid var(--border-subtle);
 }
 
-.year-section option {
-  color: black;
+/* Dropdown */
+.year-section select {
+  background: var(--surface-1);
+  color: var(--text-main);
+  border: 0.0625rem solid var(--border-subtle);
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
+/*right handthe focus boxes*/
 .focus-container {
-  flex: 0.9;
+  flex: 1.2;
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
 }
 
 .focus-box {
-  background: var(--beige);
+  background: var(--surface-1);
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  border: 0.0625rem solid var(--soft-grey);
-  box-shadow: var(--soft-shadow);
-  height: auto;
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.focus-box:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-medium);
+}
+
 .focus-box h3 {
-  color: var(--deep-maroon);
+  color: var(--accent-gold);
   margin-bottom: var(--space-sm);
 }
 
-.focus-box:hover h3, 
-.focus-box:hover {
-  color: white;
+/* timeline */
+.timeline-box {
+  background: var(--surface-1);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 0.0625rem solid var(--border-subtle);
 }
 
-.focus-box:hover {
-  background: var(--gradient-maroon-blush);
-  border: .23rem solid var(--deep-maroon);
-  transform: translateY(-.25rem);
-  box-shadow: 0 .375rem 1rem rgba(0,0,0,0.12);
-}
-
-.trackdetails-buttons {
-  margin-top: var(--space-xl);
+.timeline {
   display: flex;
-  justify-content: center;
-  gap: var(--space-lg);
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.timeline-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--text-soft);
+  border: 0.125rem solid var(--border-subtle);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-dot.done {
+  background: var(--accent-mint);
+  transform: scale(1.2);
+}
+
+/*learn smth smth*/
 .learn-section {
-  margin-top: var(--space-xl);
-  background: var(--beige);
+  margin-top: var(--space-2xl);
+  background: var(--surface-1);
   padding: var(--space-xl);
   border-radius: var(--radius-lg);
-  border: 0.2rem solid var(--sand);
-  box-shadow: var(--soft-shadow);
+  border: 0.0625rem solid var(--border-subtle);
 }
 
 .learn-section h2 {
-  color: var(--deep-maroon);
+  color: var(--accent-gold);
   margin-bottom: var(--space-md);
 }
 
 .learn-section p {
-  margin-bottom: var(--space-md);
-  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  color: var(--text-muted);
 }
 
-.btn-primary {
-  background: var(--absa-red);
-  color: white;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  border: none;
-  font-weight: bold;
-}
-
-.btn-secondary {
-  background: var(--sand);
-  color: var(--deep-maroon);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  font-weight: bold;
-}
-
+/*explainery*/
 .explainer-tiles {
-  display: flex;
-  gap: var(--space-md);
   margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--space-lg);
 }
 
 .explainer-tile {
-  flex: 1;
-  background: white;
+  background: var(--surface-2);
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  border: 0.15rem solid var(--muted-blue);
-  box-shadow: var(--soft-shadow);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.explainer-tile:hover {
-  transform: translateY(-0.25rem);
-  box-shadow: var(--medium-shadow);
+  border: 0.0625rem solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
 }
 
 .explainer-tile h4 {
-  color: var(--deep-maroon);
+  color: var(--accent-mint);
   margin-bottom: var(--space-xs);
+}
+.trackdetails-buttons {
+  margin-top: var(--space-2xl);
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.btn-too,
+.btn-wan {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-too {
+  background: var(--surface-2);
+  color: var(--text-main);
+  border: 0.0625rem solid var(--border-subtle);
+}
+
+.btn-wan {
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+}
+
+.btn-wan:hover {
+  background: var(--accent-amber);
+}
+
+/* nudges!! */
+.nudge-card {
+  margin-top: var(--space-md);
+  background: var(--surface-2);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 0.0625rem solid var(--accent-gold);
+  animation: fadeIn 0.4s ease;
+}
+
+.nudge-link {
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: inline-block;
+  margin-top: var(--space-xs);
+}
+
+.nudge-dismiss {
+  margin-top: var(--space-xs);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.saved-msg {
+  color: var(--accent-mint);
+  font-weight: 600;
+  margin-left: var(--space-sm);
+}
+
+/*Anims*/
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
 }

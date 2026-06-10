@@ -45,8 +45,8 @@ function App(){
 
             <Route path="/auth" element={<AuthPage />} />
             
-            <Route path="/trackdetails" element={<TrackDetail />} />
-            <Route path="simstudio" element={<SimulationStudio />} />
+            <Route path="/trackdetails/:trackId" element={<TrackDetail />} />
+            <Route path="simstudio/:simId" element={<SimulationStudio />} />
 
           </Routes>
           {/*didnt include the money snapshot page as i want this and profile to be the pages that require auth*/}

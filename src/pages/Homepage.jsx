@@ -1,45 +1,172 @@
 //obvious? Landingpage. each page needs a navbar yeahh 
 //added this after realising i want users to be introduced to the webapp first
-//simple as heck layout 😭
+//simple as heck layout 😭 aded usercontext here 
 
 //react stuff
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 
 //css
 import "../styles/homepage.css";
 
 
 function Homepage() {
+  //usercontext just to have the page 'rocgnise the user'
+  const { isLoggedIn, userName } = useContext(UserContext);
+
+
     //all functions in react start with return. ik why. whatever is in return gets shown on the page
     return (
     <div className="homepage-container">
         {/*a basic welcome message for the usar*/}
 
-        <section className="hero">
-            <h1> Welcome, to NexGen Wealth Studio </h1>
-            <p> A webapp that guides you, through a journey of confident finacial decision making.<br>
-            </br> Enjoy your stay.</p>
-        </section>
+        <section className="homepage-hero">
+        <div className="homepage-hero-inner">
 
-        {/*need call to action things that'll take usar into the actual meat y potatoes of this webapp*/}
-        <div className="homepage-buttons">
-            <Link className="btn-wan" to="/strattracks" >
-            Explore the different strategy tracks.</Link>
+          {/* text on the left side */}
+            <div className="hero-copy">
+              {/*dynanimc welcam message*/}
+            <span className="hero-eyebrow">
+              {isLoggedIn ? `Welcome back, ${userName}` : "Welcome"}
+            </span>
 
-            <Link to="/simlab" className="btn-too">
-            Try one of the available finacial simulations!</Link>
+
+            <h1 className="hero-title">
+              NexGen Wealth <span>Studio</span>
+            </h1>
+
+            <p className="hero-subtitle">
+              A guided financial learning platform designed to help young professionals
+              make confident, informed financial decisions through structured strategy
+              tracks and interactive simulations.
+            </p>
+
+            {/*need call to action things that'll take usar into the actual meat y potatoes of this webapp*/}
+            <div className="hero-actions">
+              <Link to="/strattracks" className="btn-primary">
+                Explore Strategy Tracks
+              </Link>
+
+              <Link to="/simlab" className="btn-secondary">
+                Try a Simulation?
+              </Link>
+            </div>
+
+            <p className="hero-meta">
+              Built for South Africans entering their financial independence journey.
+            </p>
+          </div>
+
+          {/* panel on the right side */}
+          <div className="hero-panel">
+            <span className="hero-panel-label">About This Platform</span>
+
+            <h3 className="hero-panel-title">
+              Your personalised financial learning companion
+            </h3>
+
+            <p className="hero-panel-body">
+              NexGen Wealth Studio helps you understand your finances through
+              structured guidance, practical tools, and scenario‑based simulations.
+            </p>
+
+            {/*dynamic text that recognises if the user is logged in or not*/}
+            <div className="hero-panel-highlight">
+              {isLoggedIn
+                ? "Your progress is being saved. Continue exploring your financial journey."
+                : "Create an account or log in to save your progress and track your financial journey."}
+            </div>
+          </div>
+
         </div>
+      </section>
 
         {/*and finally, encouraging usar to ofc create an account so infor can be save*/}
-        <section className="homepage-info">
-            <h2> What is this platform about? </h2>
+       <section className="homepage-section">
+        <div className="homepage-section-inner">
+
+          <div className="section-card">
+            <h2>What is NexGen Wealth Studio?</h2>
+
             <p>
-                The NexGen Wealth Studio was built to assist young professionals with managaing
-                their finiances and finacial-related decisions through guided Strategy Tracks and 
-                Interactive simulations. <Link to="/auth" className="links"> Create an account </Link> or <Link to="/auth" className="links"> Login</Link> to save your experiences within
-                this platform.
+              NexGen Wealth Studio was built to assist young professionals with
+              managing their finances and making informed financial decisions.
+              Through guided Strategy Tracks and interactive simulations, you’ll
+              learn how to navigate real‑world financial scenarios with confidence.
+              <br /><br />
+              {isLoggedIn ? (
+                <p>You’re logged in — your experience is now personalised.</p>
+              ) : (
+                <p>
+                  <Link to="/auth" className="link-inline">Create an account</Link> or{" "}
+                  <Link to="/auth" className="link-inline">log in</Link> to save your
+                  progress and personalise your experience.
+                </p>
+              )}
+
             </p>
-        </section>
+          </div>
+
+        </div>
+      </section>
+      
+            
+            {/*a small nyana preview section, will see if i leave it in or if i remove it...*/}
+             <section className="homepage-section">
+        <div className="homepage-section-inner">
+          <h2 style={{ marginBottom: "1rem" }}>Explore the Platform</h2>
+
+          <div className="preview-grid">
+
+            <div className="preview-card">
+              <span className="preview-card-label">Strategy Tracks</span>
+              <h3 className="preview-card-title">Guided Learning Paths</h3>
+              <p className="preview-card-body">
+                Step‑by‑step financial guidance tailored for young professionals.
+              </p>
+              <Link to="/strattracks" className="btn-secondary" style={{ marginTop: "0.75rem" }}>
+                View Tracks
+              </Link>
+            </div>
+
+            <div className="preview-card">
+              <span className="preview-card-label">Simulations</span>
+              <h3 className="preview-card-title">Interactive Tools</h3>
+              <p className="preview-card-body">
+                Test real‑world financial scenarios and compare outcomes.
+              </p>
+              <Link to="/simlab" className="btn-secondary" style={{ marginTop: "0.75rem" }}>
+                Try Simulations
+              </Link>
+            </div>
+
+            <div className="preview-card">
+              <span className="preview-card-label">Your Profile</span>
+              <h3 className="preview-card-title">Save Your Progress</h3>
+              <p className="preview-card-body">
+                Track your learning journey and revisit completed modules.
+              </p>
+              {isLoggedIn ? (
+                <Link to="/profile" className="btn-secondary">Go to Profile</Link>
+              ) : (
+                <Link to="/auth" className="btn-secondary">Sign In</Link>
+              )}
+
+            </div>
+          </div>
+
+        </div>
+            </section>
+            
+            {/*and finally, a footer!! i have a footer now =D*/}
+             <footer className="homepage-footer">
+        <div className="homepage-footer-inner">
+          <span>© 2026 NexGen Wealth Studio</span>
+          <span>Built for DIGA4015A</span>
+        </div>
+      </footer>
 
     </div>
     );

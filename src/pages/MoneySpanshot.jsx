@@ -3,204 +3,354 @@
 import "../styles/moneysnapshot.css";
 
 //react stuff
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 //anything else
-import { UserContext } from "../context/UserContext";
+import { loadData, saveData } from "../util/storage";
+import Tooltip from "../components/Tooltip";
+
 
 function MoneySnapshot() {
     //context related for income
     const { userIncome, setUserIncome } = useContext(UserContext);
 
-    //input states
-    const [income, setIncome] = useState(userIncome);
-    const [expenses, setExpenses] = useState(15000);
-    const [debt, setDebt] = useState(3000);
-    const [savings, setSavings] = useState(2000)
-    
-    //calculations 
-    const netCashFlow = income - expenses;
-    const savingsRate = ((savings / income) * 100).toFixed(1);
-    const debtToIncome = ((debt / income) * 100).toFixed(1);
+      //first load saved snapshot BEFORE rendering T^T (please dont break)
+    const savedSnapshot = loadData("money-snapshot", {
+        grossIncome: 0,
+        housing: 0,
+        mobility: 0,
+        lifestyle: 0,
+        debt: 0,
+        savings: 0
+    });
 
-    //verdicts
-    let verdict = "";
-    let verdictClass = "";
+    //input states INITIALIZED from saved snapshot
+    const [grossIncome, setGrossIncome] = useState(savedSnapshot.grossIncome);
+    const [housing, setHousing] = useState(savedSnapshot.housing);
+    const [mobility, setMobility] = useState(savedSnapshot.mobility);
+    const [lifestyle, setLifestyle] = useState(savedSnapshot.lifestyle);
+    const [debt, setDebt] = useState(savedSnapshot.debt);
+    const [savings, setSavings] = useState(savedSnapshot.savings);
+    const [showSavedMsg, setShowSavedMsg] = useState(false);
 
-    if (netCashFlow > 0) {
-        verdict = "You have a monthly surplus. Great job!";
-        verdictClass = "positive";
-    } else if (netCashFlow === 0) {
-        verdict = "You're breaking even. Consider reducing variable expenses.";
-        verdictClass = "neutral";
-    } else {
-        verdict = "You're in a deficit. Review your spending or increase income.";
-        verdictClass = "negative";
+    //save the snapshot whenever values change
+    useEffect(() => {
+        saveData("money-snapshot", {
+            grossIncome,
+            housing,
+            mobility,
+            lifestyle,
+            debt,
+            savings
+        });
+    }, [grossIncome, housing, mobility, lifestyle, debt, savings]);
+
+    //simpletax calculation
+    function calculateNetIncome(gross) {
+        if (gross <= 0) return 0;
+
+        let tax = 0;
+
+        if (gross <= 237100) tax = gross * 0.18;
+        else if (gross <= 370500) tax = 42678 + (gross - 237100) * 0.26;
+        else if (gross <= 512800) tax = 77362 + (gross - 370500) * 0.31;
+        else if (gross <= 673000) tax = 121475 + (gross - 512800) * 0.36;
+        else if (gross <= 857900) tax = 179147 + (gross - 673000) * 0.39;
+        else if (gross <= 1817000) tax = 251258 + (gross - 857900) * 0.41;
+        else tax = 644489 + (gross - 1817000) * 0.45;
+
+        const monthlyTax = tax / 12;
+        return Math.round(gross - monthlyTax);
     }
 
+    const netIncome = calculateNetIncome(grossIncome);
+    
+    //calculations 
+    const totalExpenses = housing + mobility + lifestyle + debt;
+    const disposableIncome = netIncome - totalExpenses;
+
+    const savingsRate = netIncome > 0 ? ((savings / netIncome) * 100).toFixed(1) : 0;
+    const debtToIncome = netIncome > 0 ? ((debt / netIncome) * 100).toFixed(1) : 0;
+    const lifestylePercent = netIncome > 0 ? ((lifestyle / netIncome) * 100).toFixed(1) : 0;
+
+    //insights
+    let insights = [];
+
+    if (lifestylePercent > 40) {
+        insights.push(`You’re allocating ${lifestylePercent}% to lifestyle — above typical for your income band.`);
+    }
+    if (debtToIncome > 35) {
+        insights.push("Your debt-to-income ratio is high. Banks prefer below 35–40%.");
+    }
+    if (savingsRate < 10) {
+        insights.push("Your savings rate is low. Aim for 10–20% for long-term stability.");
+    }
+    if (disposableIncome < 0) {
+        insights.push("Your expenses exceed your net income. Review your spending categories.");
+    }
+    if (insights.length === 0) {
+        insights.push("Your financial position looks balanced. Keep building good habits.");
+    }
+
+    //bar chart percentages
+    const totalForChart = housing + mobility + lifestyle + debt + savings;
+    const housingPct = totalForChart ? (housing / totalForChart) * 100 : 0;
+    const mobilityPct = totalForChart ? (mobility / totalForChart) * 100 : 0;
+    const lifestylePct2 = totalForChart ? (lifestyle / totalForChart) * 100 : 0;
+    const debtPct = totalForChart ? (debt / totalForChart) * 100 : 0;
+    const savingsPct = totalForChart ? (savings / totalForChart) * 100 : 0;
 
     return(
         <div className="snapshot-page">
-            <h1 className="snapshot-title"> Money Snapshot Dashboard </h1>
+
+            {/*added a page header to look...more*/}
+            <header className="snapshot-header">
+                <h1>Money Snapshot Dashboard</h1>
+                <p>Your personalised monthly financial overview</p>
+            </header>
 
             {/*inputs*/}
-            <div className="snapshot-inputs">
-                <h2>Your Inputs</h2>
+            <section className="snapshot-section">
+                <div className="section-inner">
+                    <h2 className="section-title">Your Inputs</h2>
 
-                <div className="input-group">
-                    <label>Monthly Income</label>
-                    <input type="range" min="0" max="60000" value={income}
-                        onChange={(e) => setIncome(Number(e.target.value))} />
-                    <p>R {income.toLocaleString()}</p>
-                </div>
+                    <div className="inputs-grid">
+                        {/*gross income */}
+                        <div className="input-card">
+                            <label>
+                                Gross Monthly Income
+                                <Tooltip text="Your total income before tax and deductions." />
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                value={grossIncome}
+                                onChange={(e) => setGrossIncome(Number(e.target.value))}
+                            />
+                            <p className="input-value">R {grossIncome.toLocaleString()}</p>
+                        </div>
 
-                <div className="input-group">
-                    <label>Monthly Expenses</label>
-                    <input type="range" min="0" max="60000" value={expenses}
-                        onChange={(e) => setExpenses(Number(e.target.value))} />
-                    <p>R {expenses.toLocaleString()}</p>
-                </div>
+                        {/* Housing */}
+                        <div className="input-card">
+                            <label>
+                                Housing
+                                <Tooltip text="Rent or bond payments, including levies if applicable." />
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                value={housing}
+                                onChange={(e) => setHousing(Number(e.target.value))}
+                            />
+                        </div>
 
-                <div className="input-group">
-                    <label>Debt Repayments</label>
-                    <input type="range" min="0" max="20000" value={debt}
-                        onChange={(e) => setDebt(Number(e.target.value))} />
-                    <p>R {debt.toLocaleString()}</p>
-                </div>
+                        {/* Mobility */}
+                        <div className="input-card">
+                            <label>
+                                Mobility
+                                <Tooltip text="Transport costs: petrol, Uber, car payments, insurance, etc." />
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                value={mobility}
+                                onChange={(e) => setMobility(Number(e.target.value))}
+                            />
+                        </div>
 
-                <div className="input-group">
-                    <label>Monthly Savings</label>
-                    <input type="range" min="0" max="20000" value={savings}
-                        onChange={(e) => setSavings(Number(e.target.value))} />
-                    <p>R {savings.toLocaleString()}</p>
-                </div>
-            </div>
+                        {/* Lifestyle */}
+                        <div className="input-card">
+                            <label>
+                                Lifestyle
+                                <Tooltip text="Groceries, entertainment, clothing, subscriptions, eating out." />
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                value={lifestyle}
+                                onChange={(e) => setLifestyle(Number(e.target.value))}
+                            />
+                        </div>
 
-            <button 
-                className="save-btn"
-                onClick={() => setUserIncome(income)}
-                >
-                Save to Profile
-            </button>
-            {userIncome === income && (
-                <p className="saved-msg">Saved!</p>
-            )}
+                        {/* Debt */}
+                        <div className="input-card">
+                            <label>
+                                Debt Repayments
+                                <Tooltip text="Loans, credit cards, store accounts, student loans." />
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                value={debt}
+                                onChange={(e) => setDebt(Number(e.target.value))}
+                            />
+                        </div>
 
-
-            <div className="snapshot-row top-row">
-                {/*first; month at a glance*/}
-                <section className="snapshot-card">
-                    <h2> Your Month at a Glance </h2>
-                     <div className="glance-values">
-                        <p>Income: <strong>R {income.toLocaleString()}</strong></p>
-                        <p>Expenses: <strong>R {expenses.toLocaleString()}</strong></p>
-                        <p className={`verdict ${verdictClass}`}>
-                        Net Cash Flow: R {netCashFlow.toLocaleString()}
-                        </p>
+                        {/* Savings */}
+                        <div className="input-card">
+                            <label>
+                                Savings
+                                <Tooltip text="Money you intentionally set aside monthly." />
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                value={savings}
+                                onChange={(e) => setSavings(Number(e.target.value))}
+                            />
+                        </div>
                     </div>
-                </section>
 
-                {/*spending breakdown*/}
-                <section className="snapshot-card">
-                    <h2> Spending Breakdown</h2>
-                    <div className="breakdown-grid">
-                        <div className="breakdown-item"> Housing</div>
-                        <div className="breakdown-item"> Transport</div>
-                        <div className="breakdown-item"> Debt</div>
-                        <div className="breakdown-item"> Subscriptions</div>
-                        <div className="breakdown-item"> Groceries</div>
-                        <div className="breakdown-item"> Savings</div> 
-                    </div>
-                </section>
+                   <button
+                        className="btn-primary save-btn"
+                        onClick={() => {
+                            setUserIncome(grossIncome);
+                            setShowSavedMsg(true);
+                            setTimeout(() => setShowSavedMsg(false), 2000);
+                        }}
+                    >
+                        Save Income to Profile
+                    </button>
 
-                {/*key finances...why did i make this page so elaborate 😭*/}
-                <section className="snapshot-card">
-                    <h2> Key Finances </h2>
-                    <div className="key-finances">
-                        <div className="finance-box">
-                            {/*some fake values for now ☠️*/}
-                            <p>Savings Rate</p>
+                    {showSavedMsg && (
+                        <p className="save-confirm fade-in">Income saved successfully!</p>
+                    )}
+                </div>
+            </section>
+
+            {/*metrics + bar chart stacked*/}
+            <section className="snapshot-section">
+                <div className="section-inner">
+
+                    <h2 className="section-title">Key Financial Metrics</h2>
+
+                    <div className="metrics-grid">
+                        <div className="metric-card">
+                            <p>
+                                Net Income (after tax)
+                                <Tooltip text="Your income after PAYE tax is deducted." />
+                            </p>
+                            <strong>R {netIncome.toLocaleString()}</strong>
+                        </div>
+
+                        <div className="metric-card">
+                            <p>Total Expenses
+                                <Tooltip text="Your combined monthly spending across all categories." />
+                            </p>
+                            <strong>R {totalExpenses.toLocaleString()}</strong>
+                        </div>
+
+                        <div className="metric-card">
+                            <p>Disposable Income
+                                 <Tooltip text="Money left after expenses — can be saved or spent freely as desired." />
+                            </p>
+                            <strong>R {disposableIncome.toLocaleString()}</strong>
+                        </div>
+
+                        <div className="metric-card">
+                            <p>Savings Rate
+                                <Tooltip text="Percentage of your net income that goes into savings." />
+                            </p>
                             <strong>{savingsRate}%</strong>
                         </div>
 
-                        <div className="finance-box">
-                            <p>Debt-to-Income</p>
+                        <div className="metric-card">
+                            <p>Debt-to-Income
+                                <Tooltip text="How much of your income goes toward debt repayments." />
+                            </p>
                             <strong>{debtToIncome}%</strong>
                         </div>
 
-                        <div className="finance-box">
-                            <p>Net Cash Flow</p>
-                            <strong>R {netCashFlow.toLocaleString()}</strong>
+                        <div className="metric-card">
+                            <p>Lifestyle %
+                                <Tooltip text="How much of your income is spent on non-essential lifestyle costs." />
+                            </p>
+                            <strong>{lifestylePercent}%</strong>
                         </div>
                     </div>
-                </section>
-            </div>
 
-              {/* goals + insights*/}
-            <div className="snapshot-row bottom-row">
-                
-                {/*the insidhts*/}
-                <section className="snapshot-card">
-                    <h2> Insights</h2>
+                    {/*bar chart*/}
+                    <h2 className="section-title" style={{ marginTop: "2rem" }}>Spending Breakdown</h2>
 
-                    <ul className="insights-list">
-                        <li>
-                            Your savings rate is {savingsRate}%. SA professionals aim for 10–20%.
-                        </li>
-                        <li>
-                            Debt-to-income ratio is {debtToIncome}%. Banks prefer below 40%.
-                        </li>
-                        <li>{verdict}</li>
-                    </ul>
-                </section>
-                
-                
-                {/*the goals*/}
-                <section className="snapshot-card">
-                    <h2> Your Goals</h2>
+                    <div className="bar-chart-wrapper">
 
-                    <p>Emergency Fund: 3–6 months of expenses recommended.</p>
-                    <p>Reduce debt to improve affordability.</p>
-                    <p>Increase savings rate over time.</p>
-                </section>
-            </div>
+                        <div className="bar-chart">
 
-            {/*teach the usar smth smth*/}
-            <div className="learn-section">
-                <h2>Learn: Understanding Your Money Snapshot</h2>
-                <p>
-                Your financial snapshot helps you understand how much money you keep after expenses,
-                how much you save, and how much debt you carry. These numbers influence your ability
-                to invest, buy property, or build long-term wealth.
-                </p>
-                <p>
-                In South Africa, major fixed costs include transport, electricity, medical aid,
-                and housing. Tracking these helps you stay in control of your budget.
-                </p>
-                <p>
-                A healthy financial foundation starts with a surplus, manageable debt, and consistent savings.
-                </p>
-            </div>
+                            <div className="bar-item">
+                                <p>Housing</p>
+                                <div className="bar">
+                                    <div className="bar-fill gold" style={{ height: `${housingPct}%` }}></div>
+                                </div>
+                                <span>{housingPct.toFixed(1)}%</span>
+                            </div>
 
-            {/*explainery cardz*/}
-            <div className="explainer-tiles">
-                <div className="explainer-tile">
-                    <h4>Emergency Fund</h4>
-                    <p>A buffer covering 3–6 months of expenses.</p>
+                            <div className="bar-item">
+                                <p>Mobility</p>
+                                <div className="bar">
+                                    <div className="bar-fill mint" style={{ height: `${mobilityPct}%` }}></div>
+                                </div>
+                                <span>{mobilityPct.toFixed(1)}%</span>
+                            </div>
+
+                            <div className="bar-item">
+                                <p>Lifestyle</p>
+                                <div className="bar">
+                                    <div className="bar-fill blue" style={{ height: `${lifestylePct2}%` }}></div>
+                                </div>
+                                <span>{lifestylePct2.toFixed(1)}%</span>
+                            </div>
+
+                            <div className="bar-item">
+                                <p>Debt</p>
+                                <div className="bar">
+                                    <div className="bar-fill red" style={{ height: `${debtPct}%` }}></div>
+                                </div>
+                                <span>{debtPct.toFixed(1)}%</span>
+                            </div>
+
+                            <div className="bar-item">
+                                <p>Savings</p>
+                                <div className="bar">
+                                    <div className="bar-fill purple" style={{ height: `${savingsPct}%` }}></div>
+                                </div>
+                                <span>{savingsPct.toFixed(1)}%</span>
+                            </div>
+
+                        </div>
+
                     </div>
-                    <div className="explainer-tile">
-                    <h4>Net Cash Flow</h4>
-                    <p>Your leftover money after expenses.</p>
-                    </div>
-                    <div className="explainer-tile">
-                    <h4>Debt-to-Income</h4>
-                    <p>How much of your income goes to debt.</p>
+
                 </div>
-            </div>
-          
-        </div>
+            </section>
 
+
+            {/*insights and learn side-bye-side (updating the layout i dont like how it looks)*/}
+            <section className="snapshot-section">
+                <div className="insights-learn-grid">
+
+                    {/*insights*/}
+                    <div className="section-inner insights-card">
+                        <h2 className="section-title">Insights</h2>
+                        <ul>
+                            {insights.map((i, index) => (
+                                <li key={index}>{i}</li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/*learn*/}
+                    <div className="section-inner learn-card">
+                        <h2 className="section-title">Learn: Understanding Your Snapshot</h2>
+                        <p>Your Money Snapshot helps you understand how your income is allocated across essential categories.</p>
+                        <p>In South Africa, major fixed costs include housing, transport, medical aid, and electricity.</p>
+                        <p>A strong financial foundation includes a surplus, manageable debt, and consistent savings.</p>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
     );
 }
 

@@ -1,8 +1,6 @@
 //obvious? simulation lab page. each page needs a navbar yeahh
-//literally a copypaste of the strat track layout........
-
 //css
-import "../styles/overviewpages.css";
+import "../styles/simulationlab.css";
 
 //react thingy
 import { Link } from "react-router-dom";
@@ -11,58 +9,70 @@ import { Link } from "react-router-dom";
 
 
 function SimulationLab() {
-    //all functions in react start with return, idk why yet
     return (
-        <div className=" overview-page simlab-page">
+        <div className="simlab-page">
 
-            <h1 className="overview-title"> Explore 'What-If' Scenarios</h1>
+            <header className="simlab-header">
+                <h1>Explore “What‑If” Scenarios</h1>
+                <p>Run simulations to understand how different choices shape your financial future.</p>
+            </header>
 
-            <div className="overview-row">
+            <section className="simlab-section">
+                <div className="simlab-grid">
 
-                {/*simulation wan*/}
-                <section className="overview-card">
-                    <h2> Own Property VS Renting</h2>
-                    <p className="overview-desc">
-                        Explore and compare the long-term financial outcomes of buying a home versus renting.
-                        This simulation will help you understand how each path can shape your wealth and future
-                        opportunities overtime, enabling you to make decisions that align with your current goals.
-                    </p>
-                    <Link to="/simstudio" className="overview-btn"> Start Simulation!</Link>
-                </section>
+                    {/*simulation wan*/}
+                    <div className="sim-card">
+                        <h2>Own Property vs Renting</h2>
+                        <p>
+                        Compare long‑term financial outcomes between buying a home and renting.
+                        Understand affordability, equity growth, and long‑term wealth impact.
+                        </p>
+                        <Link to="/simstudio/property-vs-rent" className="sim-btn">Run Simulation</Link>
+                    </div>
 
-                {/*simulation wan*/}
-                <section className="overview-card">
-                    <h2> Lifestyle and Investing</h2>
-                    <p className="overview-desc">
-                        Uncover how everyday lifestyle choices influence your investment growth overtime. This simulation
-                        helps you explore different spending habits and saving patterns, which can shape your finacial future.
-                    </p>
-                    <Link to="/simstudio" className="overview-btn"> Start Simulation!</Link>
-                </section>
+                    {/*simula too*/}
+                    <div className="sim-card">
+                        <h2>Lifestyle & Investing</h2>
+                        <p>
+                        Explore how lifestyle choices influence your investment growth over time.
+                        See how spending habits affect long‑term wealth.
+                        </p>
+                        <Link to="/simstudio/lifestyle-investing" className="sim-btn">Run Simulation</Link>
+                    </div>
 
-                {/*simulation tree*/}
-                <section className="overview-card">
-                    <h2> Local VS Offshore Investing</h2>
-                    <p className="overview-desc">
-                        Examine the impact of global investment versus local investment strategies on long-term gains. This simulation
-                        aids in broadening your perspective on the risks and opportunities involved with investing, and empowers you to
-                        make informed decisions.
-                    </p>
-                    <Link to="/simstudio" className="overview-btn"> Start Simulation!</Link>
-                </section>
-            </div>
+                    {/*sim tree*/}
+                    <div className="sim-card">
+                        <h2>Local vs Offshore Investing</h2>
+                        <p>
+                        Compare global vs local investment strategies. Understand risk, returns,
+                        and how diversification shapes long‑term outcomes.
+                        </p>
+                        <Link to="/simstudio/local-vs-offshore" className="sim-btn">Run Simulation</Link>
+                    </div>
 
-            {/*another recoomend box*/}
-            <div className="overview-recommended">
-                <h3> Recommended for you!</h3>
+                    {/* simlaut four new sim based on my own worries abt transport */}
+                      <div className="sim-card">
+                        <h2>Transport Cost Decision</h2>
+                        <p>
+                            Compare Uber, petrol, paying a friend, or buying a 2nd‑hand car.
+                            Understand which option is cheapest short‑term and long‑term.
+                        </p>
+                        <Link to="/simstudio/transport-decision" className="sim-btn">Run Simulation</Link>
+                    </div>
+
+                </div>
+            </section>
+
+            {/*another recomend section*/}
+            <section className="simlab-recommended">
+                <h3>Recommended Simulation</h3>
                 <p>
-                    Based on your spending habits and goals, NexGen suggests trying the
-                    <strong> Property VS Renting </strong> simulation first.
+                Based on your spending habits and goals, NexGen suggests starting with the
+                <strong> Property vs Renting </strong> simulation.
                 </p>
-            </div>
+            </section>
         </div>
     );
 }
-
 //exporting so other files can access
 export default SimulationLab;
