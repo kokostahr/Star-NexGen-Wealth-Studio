@@ -13,8 +13,8 @@ const debtFreeStable = {
         { key: "minPayments", label: "Meet Minimum Payments" },
       ],
       actions: [
-        "Create a debt overview",
-        "Avoid new debt",
+        { text: "Create a debt overview", tip: "List every debt, balance, interest rate, and minimum payment." },
+        { text: "Avoid new debt", tip: "Pause credit use to prevent your debt from growing." },
       ],
     },
     {
@@ -24,8 +24,8 @@ const debtFreeStable = {
         { key: "cutCosts", label: "Cut High‑Cost Expenses" },
       ],
       actions: [
-        "Pay off smallest or highest‑interest debt first",
-        "Reduce lifestyle costs",
+        { text: "Pay off smallest or highest‑interest debt first", tip: "Snowball boosts motivation; avalanche saves the most money." },
+        { text: "Reduce lifestyle costs", tip: "Cut back on non‑essentials to free up cash for debt repayment." },
       ],
     },
     {
@@ -35,8 +35,8 @@ const debtFreeStable = {
         { key: "creditImprove", label: "Improve Credit Score" },
       ],
       actions: [
-        "Pay bills on time",
-        "Lower credit utilisation",
+        { text: "Pay bills on time", tip: "Payment history is the biggest factor in your credit score." },
+        { text: "Lower credit utilisation", tip: "Keep credit usage under 30% to improve your score." },
       ],
     },
     {
@@ -46,8 +46,8 @@ const debtFreeStable = {
         { key: "startSaving", label: "Start Building Savings" },
       ],
       actions: [
-        "Open a savings account",
-        "Automate contributions",
+        { text: "Open a savings account", tip: "Start building a financial buffer once debt is cleared." },
+        { text: "Automate contributions", tip: "Automatic transfers help you stay consistent with saving." },
       ],
     },
     {
@@ -57,8 +57,8 @@ const debtFreeStable = {
         { key: "futurePlan", label: "Plan Long‑Term Goals" },
       ],
       actions: [
-        "Set new financial goals",
-        "Build long‑term habits",
+        { text: "Set new financial goals", tip: "Define your next phase: investing, property, or wealth building." },
+        { text: "Build long‑term habits", tip: "Maintain budgeting, saving, and responsible spending." },
       ],
     },
   ],

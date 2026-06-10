@@ -13,8 +13,8 @@ const firstProperty = {
         { key: "budget", label: "Stabilise Budget" },
       ],
       actions: [
-        "Track monthly expenses",
-        "Cut unnecessary spending",
+        { text: "Track monthly expenses", tip: "Know exactly where your money goes each month." },
+        { text: "Cut unnecessary spending", tip: "Reduce non‑essential costs to boost savings." },
       ],
     },
     {
@@ -24,8 +24,8 @@ const firstProperty = {
         { key: "credit", label: "Improve Credit Score" },
       ],
       actions: [
-        "Pay bills on time",
-        "Reduce credit utilisation",
+        { text: "Pay bills on time", tip: "On‑time payments improve your credit score." },
+        { text: "Reduce credit utilisation", tip: "Keep credit usage below 30% for a healthier score." },
       ],
     },
     {
@@ -35,9 +35,10 @@ const firstProperty = {
         { key: "debt", label: "Reduce Debt" },
       ],
       actions: [
-        "Increase monthly savings",
-        "Pay off high‑interest debt",
+        { text: "Increase monthly savings", tip: "Boost your deposit faster by saving more each month." },
+        { text: "Pay off high‑interest debt", tip: "Reduce expensive debt to improve affordability." },
       ],
+
     },
     {
       year: 4,
@@ -46,8 +47,8 @@ const firstProperty = {
         { key: "preapproval", label: "Bond Pre‑Approval" },
       ],
       actions: [
-        "Compare banks",
-        "Check affordability",
+        { text: "Compare banks", tip: "Different banks offer different interest rates and fees." },
+        { text: "Check affordability", tip: "Ensure your income qualifies you for the bond you want." },
       ],
     },
     {
@@ -57,8 +58,8 @@ const firstProperty = {
         { key: "legal", label: "Prepare Legal Fees" },
       ],
       actions: [
-        "Find conveyancer",
-        "Review transfer costs",
+        { text: "Find conveyancer", tip: "A conveyancer handles the legal transfer of property." },
+        { text: "Review transfer costs", tip: "Understand all fees before making an offer." },
       ],
     },
   ],

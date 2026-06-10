@@ -13,8 +13,8 @@ const lifestyleInvesting = {
         { key: "track", label: "Track Spending Habits" },
       ],
       actions: [
-        "Categorise monthly expenses",
-        "Identify lifestyle leaks",
+       { text: "Categorise monthly expenses", tip: "Sort your spending into categories to see patterns clearly." },
+       { text: "Identify lifestyle leaks", tip: "Find small recurring expenses that add up over time." },
       ],
     },
     {
@@ -24,8 +24,8 @@ const lifestyleInvesting = {
         { key: "emergency", label: "Build Emergency Fund" },
       ],
       actions: [
-        "Automate monthly contributions",
-        "Open a TFSA or RA",
+        { text: "Automate monthly contributions", tip: "Set up automatic transfers to stay consistent with investing." },
+        { text: "Open a TFSA or RA", tip: "Tax‑efficient accounts help your investments grow faster." },
       ],
     },
     {
@@ -35,8 +35,8 @@ const lifestyleInvesting = {
         { key: "reduceLifestyle", label: "Reduce Lifestyle Inflation" },
       ],
       actions: [
-        "Review subscriptions",
-        "Optimise discretionary spending",
+        { text: "Review subscriptions", tip: "Cancel unused or forgotten subscriptions to save money." },
+        { text: "Optimise discretionary spending", tip: "Cut back on non‑essentials without hurting your lifestyle." },
       ],
     },
     {
@@ -46,8 +46,8 @@ const lifestyleInvesting = {
         { key: "rebalance", label: "Rebalance Portfolio" },
       ],
       actions: [
-        "Explore offshore exposure",
-        "Review risk tolerance",
+        { text: "Explore offshore exposure", tip: "Diversify your investments across global markets." },
+        { text: "Review risk tolerance", tip: "Ensure your portfolio matches your comfort with risk." },
       ],
     },
     {
@@ -57,8 +57,8 @@ const lifestyleInvesting = {
         { key: "reviewWealth", label: "Review Wealth Growth" },
       ],
       actions: [
-        "Assess 5‑year progress",
-        "Adjust goals for next phase",
+        { text: "Assess 5‑year progress", tip: "Review your financial growth and adjust your goals." },
+        { text: "Adjust goals for next phase", tip: "Refine your long‑term plan based on your progress." },
       ],
     },
   ],

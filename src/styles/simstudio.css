@@ -77,12 +77,22 @@
 
 /*inputs*/
 .inputs-container {
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
   background: var(--surface-1);
   padding: var(--space-lg);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-soft);
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  width: 100%;
+  justify-items: center;
 }
 
 .inputs-container h2 {
@@ -123,6 +133,13 @@
   color: var(--accent-gold);
 }
 
+/* mobile responsiveness for inputs */
+@media (max-width: 40rem) {
+  .inputs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .calculate-btn {
   width: 100%;
   padding: var(--space-sm);
@@ -147,6 +164,8 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-soft);
+  max-height: 40rem;
+  overflow-y: auto;
 }
 
 .outputs-container h2 {

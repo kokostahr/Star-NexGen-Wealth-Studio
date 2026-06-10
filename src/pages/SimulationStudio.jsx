@@ -123,29 +123,30 @@ function SimulationStudio() {
                 {/*inputs*/}
                 <div className="inputs-container">
                 <h2>Inputs</h2>
+                    <div className="inputs-grid">
+                        {sim.inputs.map((input) => (
+                            <div className="input-group" key={input.key}>
+                                <label>
+                                    {input.label}
+                                    {input.tooltip && <Tooltip text={input.tooltip} />}
+                                </label>
 
-                {sim.inputs.map((input) => (
-                    <div className="input-group" key={input.key}>
-                        <label>
-                            {input.label}
-                            {input.tooltip && <Tooltip text={input.tooltip} />}
-                        </label>
+                                <input
+                                    type="number"
+                                    min={input.min}
+                                    max={input.max}
+                                    value={values[input.key]}
+                                    onChange={(e) => updateValue(input.key, e.target.value)}
+                                />
 
-                        <input
-                            type="number"
-                            min={input.min}
-                            max={input.max}
-                            value={values[input.key]}
-                            onChange={(e) => updateValue(input.key, e.target.value)}
-                        />
-
-                        <p className="input-value">
-                            {input.key === "interest"
-                            ? `${values[input.key]}%`
-                            : `R ${values[input.key].toLocaleString()}`}
-                        </p>
+                                <p className="input-value">
+                                    {input.key === "interest"
+                                    ? `${values[input.key]}%`
+                                    : `R ${values[input.key].toLocaleString()}`}
+                                </p>
+                            </div>
+                        ))}
                     </div>
-                ))}
 
             <button className="calculate-btn" onClick={handleCalculate}>
                 Calculate

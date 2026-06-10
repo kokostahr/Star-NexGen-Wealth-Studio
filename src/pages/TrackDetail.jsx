@@ -11,6 +11,7 @@ import { UserContext } from "../context/UserContext";
 //any other stuff ig
 import { tracks } from "../tracks";
 import { saveData, loadData } from "../util/storage";
+import Tooltip from "../components/Tooltip";
 
 
 function TrackDetail() {
@@ -96,8 +97,6 @@ function TrackDetail() {
   }
 
 
-
-
   return (
     <div className="trackdetails-page">
 
@@ -152,7 +151,10 @@ function TrackDetail() {
                 <h3>Action Steps</h3>
                 <ul>
                   {yearObj.actions.map((step, index) => (
-                    <li key={index}>{step}</li>
+                    <li key={index}>
+                      {step.text}
+                      <Tooltip text={step.tip} />
+                    </li>
                   ))}
                 </ul>
               </div>
