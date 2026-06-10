@@ -5,53 +5,46 @@ import "../styles/moneysnapshot.css";
 //react stuff
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { useLocation } from "react-router-dom";
 
 //anything else
+import { loadData, saveData } from "../util/storage";
+import Tooltip from "../components/Tooltip";
 
 
 function MoneySnapshot() {
     //context related for income
     const { userIncome, setUserIncome } = useContext(UserContext);
-    const { isLoggedIn } = useContext(UserContext);
 
-    const location = useLocation();
+      //first load saved snapshot BEFORE rendering T^T (please dont break)
+    const savedSnapshot = loadData("money-snapshot", {
+        grossIncome: 0,
+        housing: 0,
+        mobility: 0,
+        lifestyle: 0,
+        debt: 0,
+        savings: 0
+    });
 
-    //input states with localStorage laod
-    const [grossIncome, setGrossIncome] = useState(0);
-    const [housing, setHousing] = useState(0);
-    const [mobility, setMobility] = useState(0);
-    const [lifestyle, setLifestyle] = useState(0);
-    const [debt, setDebt] = useState(0);
-    const [savings, setSavings] = useState(0);
+    //input states INITIALIZED from saved snapshot
+    const [grossIncome, setGrossIncome] = useState(savedSnapshot.grossIncome);
+    const [housing, setHousing] = useState(savedSnapshot.housing);
+    const [mobility, setMobility] = useState(savedSnapshot.mobility);
+    const [lifestyle, setLifestyle] = useState(savedSnapshot.lifestyle);
+    const [debt, setDebt] = useState(savedSnapshot.debt);
+    const [savings, setSavings] = useState(savedSnapshot.savings);
     const [showSavedMsg, setShowSavedMsg] = useState(false);
 
-    //load the saved monisnapshot
+    //save the snapshot whenever values change
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("money-snapshot"));
-        if (saved) {
-            setGrossIncome(saved.grossIncome);
-            setHousing(saved.housing);
-            setMobility(saved.mobility);
-            setLifestyle(saved.lifestyle);
-            setDebt(saved.debt);
-            setSavings(saved.savings);
-        }
-    }, []);
-
-    //save the monisnap autocmatically
-    useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("money-snapshot"));
-        if (saved) {
-            setGrossIncome(saved.grossIncome);
-            setHousing(saved.housing);
-            setMobility(saved.mobility);
-            setLifestyle(saved.lifestyle);
-            setDebt(saved.debt);
-            setSavings(saved.savings);
-        }
-    }, [location.pathname]);
-
+        saveData("money-snapshot", {
+            grossIncome,
+            housing,
+            mobility,
+            lifestyle,
+            debt,
+            savings
+        });
+    }, [grossIncome, housing, mobility, lifestyle, debt, savings]);
 
     //simpletax calculation
     function calculateNetIncome(gross) {
@@ -125,7 +118,10 @@ function MoneySnapshot() {
                     <div className="inputs-grid">
                         {/*gross income */}
                         <div className="input-card">
-                            <label>Gross Monthly Income</label>
+                            <label>
+                                Gross Monthly Income
+                                <Tooltip text="Your total income before tax and deductions." />
+                            </label>
                             <input
                                 type="number"
                                 min="0"
@@ -137,7 +133,10 @@ function MoneySnapshot() {
 
                         {/* Housing */}
                         <div className="input-card">
-                            <label>Housing</label>
+                            <label>
+                                Housing
+                                <Tooltip text="Rent or bond payments, including levies if applicable." />
+                            </label>
                             <input
                                 type="number"
                                 min="0"
@@ -148,7 +147,10 @@ function MoneySnapshot() {
 
                         {/* Mobility */}
                         <div className="input-card">
-                            <label>Mobility</label>
+                            <label>
+                                Mobility
+                                <Tooltip text="Transport costs: petrol, Uber, car payments, insurance, etc." />
+                            </label>
                             <input
                                 type="number"
                                 min="0"
@@ -159,7 +161,10 @@ function MoneySnapshot() {
 
                         {/* Lifestyle */}
                         <div className="input-card">
-                            <label>Lifestyle</label>
+                            <label>
+                                Lifestyle
+                                <Tooltip text="Groceries, entertainment, clothing, subscriptions, eating out." />
+                            </label>
                             <input
                                 type="number"
                                 min="0"
@@ -170,7 +175,10 @@ function MoneySnapshot() {
 
                         {/* Debt */}
                         <div className="input-card">
-                            <label>Debt Repayments</label>
+                            <label>
+                                Debt Repayments
+                                <Tooltip text="Loans, credit cards, store accounts, student loans." />
+                            </label>
                             <input
                                 type="number"
                                 min="0"
@@ -181,7 +189,10 @@ function MoneySnapshot() {
 
                         {/* Savings */}
                         <div className="input-card">
-                            <label>Savings</label>
+                            <label>
+                                Savings
+                                <Tooltip text="Money you intentionally set aside monthly." />
+                            </label>
                             <input
                                 type="number"
                                 min="0"
@@ -216,32 +227,45 @@ function MoneySnapshot() {
 
                     <div className="metrics-grid">
                         <div className="metric-card">
-                            <p>Net Income (after tax)</p>
+                            <p>
+                                Net Income (after tax)
+                                <Tooltip text="Your income after PAYE tax is deducted." />
+                            </p>
                             <strong>R {netIncome.toLocaleString()}</strong>
                         </div>
 
                         <div className="metric-card">
-                            <p>Total Expenses</p>
+                            <p>Total Expenses
+                                <Tooltip text="Your combined monthly spending across all categories." />
+                            </p>
                             <strong>R {totalExpenses.toLocaleString()}</strong>
                         </div>
 
                         <div className="metric-card">
-                            <p>Disposable Income</p>
+                            <p>Disposable Income
+                                 <Tooltip text="Money left after expenses — can be saved or spent freely as desired." />
+                            </p>
                             <strong>R {disposableIncome.toLocaleString()}</strong>
                         </div>
 
                         <div className="metric-card">
-                            <p>Savings Rate</p>
+                            <p>Savings Rate
+                                <Tooltip text="Percentage of your net income that goes into savings." />
+                            </p>
                             <strong>{savingsRate}%</strong>
                         </div>
 
                         <div className="metric-card">
-                            <p>Debt-to-Income</p>
+                            <p>Debt-to-Income
+                                <Tooltip text="How much of your income goes toward debt repayments." />
+                            </p>
                             <strong>{debtToIncome}%</strong>
                         </div>
 
                         <div className="metric-card">
-                            <p>Lifestyle %</p>
+                            <p>Lifestyle %
+                                <Tooltip text="How much of your income is spent on non-essential lifestyle costs." />
+                            </p>
                             <strong>{lifestylePercent}%</strong>
                         </div>
                     </div>
