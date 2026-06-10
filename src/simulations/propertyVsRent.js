@@ -6,11 +6,26 @@ const propertyVsRent = {
   title: "Property vs Renting",
   
   inputs: [
-    { key: "salary", label: "Monthly Salary", min: 0, max: 100000, default: 25000 },
-    { key: "rent", label: "Monthly Rent", min: 0, max: 20000, default: 8000 },
-    { key: "price", label: "Property Price", min: 0, max: 2000000, default: 950000 },
-    { key: "deposit", label: "Property Deposit", min: 0, max: 300000, default: 100000 },
-    { key: "interest", label: "Interest Rate (%)", min: 0, max: 20, default: 7 },
+    {
+      key: "salary", label: "Monthly Salary", min: 0, max: 100000, default: 25000,
+      tooltip: "Your monthly income before deductions. Helps assess affordability."
+     },
+    {
+      key: "rent", label: "Monthly Rent", min: 0, max: 20000, default: 8000,
+      tooltip: "Your current or expected monthly rental payment."
+    },
+    {
+      key: "price", label: "Property Price", min: 0, max: 2000000, default: 950000,
+      tooltip: "Total purchase price of the property you want to buy."
+    },
+    {
+      key: "deposit", label: "Property Deposit", min: 0, max: 300000, default: 100000,
+      tooltip: "Upfront amount paid to reduce your bond. Higher deposits lower repayments."
+    },
+    {
+      key: "interest", label: "Interest Rate (%)", min: 0, max: 20, default: 7,
+      tooltip: "Bond interest rate based on SA prime lending rate. Affects monthly repayments."
+    },
   ],
 
   outputLabels: {

@@ -1,15 +1,22 @@
 //obvious? Landingpage. each page needs a navbar yeahh 
 //added this after realising i want users to be introduced to the webapp first
-//simple as heck layout 😭
+//simple as heck layout 😭 aded usercontext here 
 
 //react stuff
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 
 //css
 import "../styles/homepage.css";
 
 
 function Homepage() {
+  //usercontext just to have the page 'rocgnise the user'
+  const { isLoggedIn, userName } = useContext(UserContext);
+
+
     //all functions in react start with return. ik why. whatever is in return gets shown on the page
     return (
     <div className="homepage-container">
@@ -19,8 +26,12 @@ function Homepage() {
         <div className="homepage-hero-inner">
 
           {/* text on the left side */}
-          <div className="hero-copy">
-            <span className="hero-eyebrow">Welcome</span>
+            <div className="hero-copy">
+              {/*dynanimc welcam message*/}
+            <span className="hero-eyebrow">
+              {isLoggedIn ? `Welcome back, ${userName}` : "Welcome"}
+            </span>
+
 
             <h1 className="hero-title">
               NexGen Wealth <span>Studio</span>
@@ -61,9 +72,11 @@ function Homepage() {
               structured guidance, practical tools, and scenario‑based simulations.
             </p>
 
+            {/*dynamic text that recognises if the user is logged in or not*/}
             <div className="hero-panel-highlight">
-              Create an account or log in to save your progress and track your
-              financial journey.
+              {isLoggedIn
+                ? "Your progress is being saved. Continue exploring your financial journey."
+                : "Create an account or log in to save your progress and track your financial journey."}
             </div>
           </div>
 
@@ -83,9 +96,16 @@ function Homepage() {
               Through guided Strategy Tracks and interactive simulations, you’ll
               learn how to navigate real‑world financial scenarios with confidence.
               <br /><br />
-              <Link to="/auth" className="link-inline">Create an account</Link> or{" "}
-              <Link to="/auth" className="link-inline">log in</Link> to save your
-              progress and personalise your experience.
+              {isLoggedIn ? (
+                <p>You’re logged in — your experience is now personalised.</p>
+              ) : (
+                <p>
+                  <Link to="/auth" className="link-inline">Create an account</Link> or{" "}
+                  <Link to="/auth" className="link-inline">log in</Link> to save your
+                  progress and personalise your experience.
+                </p>
+              )}
+
             </p>
           </div>
 
@@ -128,9 +148,12 @@ function Homepage() {
               <p className="preview-card-body">
                 Track your learning journey and revisit completed modules.
               </p>
-              <Link to="/profile" className="btn-secondary" style={{ marginTop: "0.75rem" }}>
-                Go to Profile
-              </Link>
+              {isLoggedIn ? (
+                <Link to="/profile" className="btn-secondary">Go to Profile</Link>
+              ) : (
+                <Link to="/auth" className="btn-secondary">Sign In</Link>
+              )}
+
             </div>
           </div>
 

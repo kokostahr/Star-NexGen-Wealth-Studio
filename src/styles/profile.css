@@ -227,6 +227,62 @@
   text-align: center;
 }
 
+/* the saved tracks and simualteopn */
+.saved-list {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.saved-list li {
+  background: var(--surface-2);
+  border: 0.0625rem solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.saved-list li:hover {
+  transform: translateY(-0.15rem);
+  box-shadow: var(--shadow-medium);
+}
+
+.saved-list strong {
+  font-size: 1rem;
+  color: var(--accent-gold);
+}
+
+.saved-list span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Continue button inside the saved itemscards */
+.small-btn {
+  margin-top: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--accent-mint);
+  color: var(--bg-dark);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  width: fit-content;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.small-btn:hover {
+  background: var(--accent-gold);
+  transform: translateY(-0.15rem);
+}
+
 /*anims*/
 .fade-in {
   animation: fadeIn 0.6s ease;

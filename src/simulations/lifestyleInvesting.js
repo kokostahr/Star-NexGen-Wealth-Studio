@@ -5,10 +5,22 @@ const lifestyleInvesting = {
   title: "Lifestyle & Investing",
 
   inputs: [
-    { key: "income", label: "Monthly Income", min: 0, max: 100000, default: 25000 },
-    { key: "spend", label: "Lifestyle Spending", min: 0, max: 80000, default: 15000 },
-    { key: "invest", label: "Monthly Investing", min: 0, max: 50000, default: 3000 },
-    { key: "returnRate", label: "Expected Return (%)", min: 0, max: 20, default: 8 },
+    {
+      key: "income", label: "Monthly Income", min: 0, max: 100000, default: 25000,
+       tooltip: "Your monthly take‑home pay. Used to calculate your savings and investing rate."
+     },
+    {
+      key: "spend", label: "Lifestyle Spending", min: 0, max: 80000, default: 15000,
+      tooltip: "Total monthly spending on non‑essentials such as entertainment, food, and shopping."
+    },
+    {
+      key: "invest", label: "Monthly Investing", min: 0, max: 50000, default: 3000,
+      tooltip: "Amount you invest every month. Even small amounts grow significantly over time."
+    },
+    {
+      key: "returnRate", label: "Expected Return (%)", min: 0, max: 20, default: 8,
+      tooltip: "Average annual growth rate of your investments. Higher returns increase compounding."
+    },
   ],
 
   outputLabels: {

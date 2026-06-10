@@ -49,6 +49,17 @@ function SimulationLab() {
                         </p>
                         <Link to="/simstudio/local-vs-offshore" className="sim-btn">Run Simulation</Link>
                     </div>
+
+                    {/* simlaut four new sim based on my own worries abt transport */}
+                      <div className="sim-card">
+                        <h2>Transport Cost Decision</h2>
+                        <p>
+                            Compare Uber, petrol, paying a friend, or buying a 2nd‑hand car.
+                            Understand which option is cheapest short‑term and long‑term.
+                        </p>
+                        <Link to="/simstudio/transport-decision" className="sim-btn">Run Simulation</Link>
+                    </div>
+
                 </div>
             </section>
 

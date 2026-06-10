@@ -20,7 +20,7 @@ import { UserContext } from "../context/UserContext";
 
 function AuthPage() {
     //using context to store the username in a dynamic but kinda static way xD
-    const { setUserName, setUserEmail } = useContext(UserContext);
+    const { setUserName, setUserEmail, setIsLoggedIn } = useContext(UserContext);
 
     //need the variables so that the info can switch ofc
     const [isLogin, setIsLogin] = useState(false);
@@ -89,15 +89,32 @@ function AuthPage() {
         }
 
         if (Object.keys(validationErrors).length === 0) {
-            setGeneralError("");
+        setGeneralError("");
 
-            //sucess message when things are done RIGHT
-            alert(isLogin ? "Login successful 😌🔥" : "Account Created. Welcome to NexGen!")
-            setUserName(formData.name);
-            setUserEmail(formData.email);
-            //then take the usar to the empty barebones profile for now
-            navigate("/profile");
-        }
+        //sucess message when things are done RIGHT
+        alert(isLogin ? "Login successful 😌🔥" : "Account Created. Welcome to NexGen!");
+
+        //save the usar info to context
+        setUserName(formData.name);
+        setUserEmail(formData.email);
+
+        //mark the usar as logged in
+        setIsLoggedIn(true);
+
+        //save the session so navbar + tracks know the usar is logged in
+        localStorage.setItem(
+            "user-session",
+            JSON.stringify({
+                userName: formData.name,
+                userEmail: formData.email,
+                userIncome: 0, //default for now
+            })
+        );
+
+        //then take the usar to the empty barebones profile for now
+        navigate("/profile");
+    }
+
         
     }
     

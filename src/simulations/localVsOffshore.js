@@ -5,10 +5,22 @@ const localVsOffshore = {
   title: "Local vs Offshore Investing",
 
   inputs: [
-    { key: "lumpSum", label: "Once‑Off Investment", min: 0, max: 1000000, default: 100000 },
-    { key: "localReturn", label: "Local Return (%)", min: 0, max: 20, default: 9 },
-    { key: "offshoreReturn", label: "Offshore Return (%)", min: 0, max: 25, default: 11 },
-    { key: "randDepreciation", label: "Rand Weakening per Year (%)", min: 0, max: 20, default: 5 },
+    {
+      key: "lumpSum", label: "Once‑Off Investment", min: 0, max: 1000000, default: 100000,
+      tooltip: "The amount you invest upfront at the start of the 5‑year period."
+     },
+    {
+      key: "localReturn", label: "Local Return (%)", min: 0, max: 20, default: 9,
+      tooltip: "Expected annual growth rate of South African investments (before inflation)."
+    },
+    {
+      key: "offshoreReturn", label: "Offshore Return (%)", min: 0, max: 25, default: 11,
+      tooltip: "Expected annual growth rate of global investments in foreign currency."
+    },
+    {
+      key: "randDepreciation", label: "Rand Weakening per Year (%)", min: 0, max: 20, default: 5,
+      tooltip: "How much the rand loses value against major currencies each year."
+    },
   ],
 
   outputLabels: {
