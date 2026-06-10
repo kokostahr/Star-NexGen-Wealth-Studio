@@ -111,7 +111,7 @@ function SimulationStudio() {
 
         alert("Scenario saved!");
     }
-y
+
 
     return (
         <div className="simstudio-page">
