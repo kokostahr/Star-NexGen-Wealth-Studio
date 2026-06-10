@@ -156,7 +156,6 @@
   text-align: center;
 }
 
-
 /*metrics */
 .metrics-grid {
   display: grid;
@@ -209,7 +208,7 @@
 .bar {
   width: 100%;
   height: 10rem;
-  background: var(--surface-2);
+  background: #0A0A0A !important;
   border-radius: var(--radius-sm);
   border: 0.0625rem solid var(--border-subtle);
   display: flex;
@@ -224,11 +223,11 @@
 }
 
 /*graph fill colours*/
-.bar-fill.gold { background: var(--accent-gold); }
-.bar-fill.mint { background: var(--accent-mint); }
-.bar-fill.blue { background: var(--chart-blue); }
-.bar-fill.red { background: var(--chart-red); }
-.bar-fill.purple { background: var(--chart-purple); }
+.bar-fill.gold { background: #C9A86A !important; }
+.bar-fill.mint { background: #A3E4C1 !important; }
+.bar-fill.blue { background: #6AB4F8 !important; }
+.bar-fill.red { background: #E57373 !important; }
+.bar-fill.purple { background: #C39BD3 !important; }
 
 .bar-item span {
   display: block;

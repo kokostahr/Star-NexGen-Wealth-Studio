@@ -5,6 +5,7 @@ import "../styles/moneysnapshot.css";
 //react stuff
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { useLocation } from "react-router-dom";
 
 //anything else
 
@@ -13,6 +14,8 @@ function MoneySnapshot() {
     //context related for income
     const { userIncome, setUserIncome } = useContext(UserContext);
     const { isLoggedIn } = useContext(UserContext);
+
+    const location = useLocation();
 
     //input states with localStorage laod
     const [grossIncome, setGrossIncome] = useState(0);
@@ -38,18 +41,17 @@ function MoneySnapshot() {
 
     //save the monisnap autocmatically
     useEffect(() => {
-        localStorage.setItem(
-        "money-snapshot",
-        JSON.stringify({
-            grossIncome,
-            housing,
-            mobility,
-            lifestyle,
-            debt,
-            savings,
-        })
-        );
-    }, [grossIncome, housing, mobility, lifestyle, debt, savings]);
+        const saved = JSON.parse(localStorage.getItem("money-snapshot"));
+        if (saved) {
+            setGrossIncome(saved.grossIncome);
+            setHousing(saved.housing);
+            setMobility(saved.mobility);
+            setLifestyle(saved.lifestyle);
+            setDebt(saved.debt);
+            setSavings(saved.savings);
+        }
+    }, [location.pathname]);
+
 
     //simpletax calculation
     function calculateNetIncome(gross) {
